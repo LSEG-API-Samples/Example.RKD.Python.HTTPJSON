@@ -1,11 +1,21 @@
-import zeep
+import requests
+import json
 
 username = 'trcsmnldauki@thomsonreuters.com'
 appid = 'rkdapi'
 password = 'Welcome75'
 
-authen_wsdl = 'http://api.rkd.reuters.com/schemas/wsdl/TokenManagement_1_HttpsAndAnonymous.wsdl'
-quote_wsdl = 'http://api.rkd.reuters.com/schemas/wsdl/Quotes_1_HttpAndRKDToken.wsdl'
-client = zeep.Client(wsdl=authen_wsdl)
+authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
 
-authen_request = client.get_type
+authenMsg = {'CreateServiceToken_Request_1': { 'ApplicationID':appid, 'Username':username,'Password':password }}
+headers = {'content-type': 'application/json;charset=utf-8'}
+
+result = requests.post(authenURL, data = json.dumps(authenMsg), headers=headers)
+print 'response status %s'%(result.status_code)
+print 'response header %s'%(result.headers)
+print 'response raw data = %s'%(result.json())
+
+token = result.json()['CreateServiceToken_Response_1']['Token']
+print token
+expire = result.json()['CreateServiceToken_Response_1']['Expiration']
+
