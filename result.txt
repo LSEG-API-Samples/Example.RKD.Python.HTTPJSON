@@ -1,3 +1,0 @@
-response status 200
-response header {'Content-Length': '282', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'Server': 'Microsoft-IIS/8.0', 'X-TRKD-ServerName': 'CZP/API4', 'Cache-Control': 'no-store', 'Date': 'Thu, 25 Aug 2016 09:43:51 GMT', 'Content-Type': 'application/json'}
-response raw data = {u'CreateServiceToken_Response_1': {u'Token': u'304A3910DC2A318B4855197B183350AC33382A758EB825C74E66DBEF4C8F4426C1769DB066B337882202EFE6D4540CBB2C027FA7EA184EFCEDE9831F6F332E91A7B19908391EA04EE65B8166BDE83A49FA3E6AEF29E51E1C83B6CCF6482E743F', u'Expiration': u'2016-08-25T11:13:52.0951116Z'}}
