@@ -6,7 +6,14 @@ However, we do not offer support and troubleshooting of issues that are related 
 in a particular environment; it is offered solely as sample code for guidance. 
 Please see the Thomson Reuters Knowledge Direct product page at http://customers.thomsonreuters.com 
 for additional information regarding the TRKD API.'''
-
+'''
+The TRKD API sample code is provided for informational purposes only 
+and without knowledge or assumptions of the end users development environment. 
+We offer this code to provide developers practical and useful guidance while developing their own code. 
+However, we do not offer support and troubleshooting of issues that are related to the use of this code 
+in a particular environment; it is offered solely as sample code for guidance. 
+Please see the Thomson Reuters Knowledge Direct product page at http://customers.thomsonreuters.com 
+for additional information regarding the TRKD API.'''
 
 import os
 import sys
@@ -42,27 +49,33 @@ def CreateAuthorization(username, password, appid):
     return token
 
 ## Perform Quote request 
-def RetrieveQuotes(token,appid):
+def RetrieveQuotes(token, appid):
+
+    ricName = raw_input('Please input Symbol: ')
+    fieldFiltering = raw_input('Subscribe all Field? (Yes|No)')
+    quoteRequestMsg = None
+    fieldsName = 'CF_LAST:CF_HIGH:CF_LOW:CF_BID:CF_ASK:CF_YIELD:CF_SOURCE:CF_SRC_PAGE:CF_LOTSIZE:CF_DATE:CF_TIME:CF_TICK:CF_NETCHNG:CF_EXCHNG:CF_VOLUME:CF_CLOSE:CF_OPEN:CF_NAME:CF_CURRENCY'
+    if fieldFiltering == 'Yes':
+        ## Request all Fields
+        quoteRequestMsg = \
+            {'RetrieveItem_Request_3': {'TrimResponse': False,
+             'ItemRequest': [{'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}], 'Scope': 'All',
+             'ProvideChainLinks': True}]}}
+    elif fieldFiltering == 'No':
+        ## Request specific Fields
+        fieldsName = raw_input('Input interested Field Name in the following format (BID:ASK:TRDPRC_1)')
+        quoteRequestMsg = \
+            {'RetrieveItem_Request_3': {'TrimResponse': False,
+             'ItemRequest': [{
+            'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}],
+            'Fields': fieldsName,
+            'Scope': 'List',
+            'ProvideChainLinks': True,
+            }]}}
+
     quoteURL = 'https://api.trkd.thomsonreuters.com/api/Quotes/Quotes.svc/REST/Quotes_1/RetrieveItem_3'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
-    quoteRequestMsg = {
-        'RetrieveItem_Request_3': {
-            'TrimResponse': False,
-            'ItemRequest': [
-                {
-                    'Fields': 'CF_LAST:CF_HIGH:CF_LOW:CF_BID:CF_ASK:CF_YIELD:CF_DATE:CF_TIME:CF_VOLUME:CF_CLOSE:CF_OPEN:CF_NAME',
-                    'RequestKey': [
-                        {
-                            'Name': 'VOD.L',
-                            'NameType': 'RIC'
-                        }
-                    ],
-                    'Scope': 'List',
-                    'ProvideChainLinks': True
-                }
-            ]
-        }
-    }
+    
     print '############### Sending Quote request message to TRKD ###############'
     try:
         ##send request
