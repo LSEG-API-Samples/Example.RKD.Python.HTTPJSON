@@ -2,6 +2,7 @@
 This is an example project that shows how to implement TRKD REST Client with python
 - trkd_authen.py: An example application that shows how to authenticate with TRKD service
 - trkd_quote.py: An example application that shows how to subscribe (all fields and specific fields) the Quote data from TRKD service
+- trkd_newsheadline.py: An example application that shows how to subscribe the News Headline data from TRKD service
 
 
 #prerequisite
@@ -34,3 +35,5 @@ The best way is to get the pip package management tool
 - Version 1: 6 Sep 2016
     - trkd_authen.py
 	- trkd_quote.py
+- Version 1.0.1: 7 Sep 2016
+	- trkd_newsheadline.py

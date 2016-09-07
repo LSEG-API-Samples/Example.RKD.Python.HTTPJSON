@@ -7,7 +7,6 @@ in a particular environment; it is offered solely as sample code for guidance.
 Please see the Thomson Reuters Knowledge Direct product page at http://customers.thomsonreuters.com 
 for additional information regarding the TRKD API.'''
 
-
 import os
 import sys
 import requests
@@ -25,7 +24,7 @@ def CreateAuthorization(username, password, appid):
     try:
         ##send request
         result = requests.post(authenURL, data = json.dumps(authenMsg), headers=headers)
-        if result.status_code == 200:
+        if result.status_code == 200: 
             print 'Authen success'
             print 'response status %s'%(result.status_code)
             ##get Token
@@ -41,50 +40,46 @@ def CreateAuthorization(username, password, appid):
     
     return token
 
-## Perform Quote request 
-def RetrieveQuotes(token, appid):
-
-    ricName = raw_input('Please input Symbol: ')
-    fieldFiltering = raw_input('Subscribe all Field? (Yes|No)')
-    quoteRequestMsg = None
-    fieldsName = 'CF_LAST:CF_HIGH:CF_LOW:CF_BID:CF_ASK:CF_YIELD:CF_SOURCE:CF_SRC_PAGE:CF_LOTSIZE:CF_DATE:CF_TIME:CF_TICK:CF_NETCHNG:CF_EXCHNG:CF_VOLUME:CF_CLOSE:CF_OPEN:CF_NAME:CF_CURRENCY'
-    if fieldFiltering == 'Yes':
-        ## Request all Fields
-        quoteRequestMsg = \
-            {'RetrieveItem_Request_3': {'TrimResponse': False,
-             'ItemRequest': [{'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}], 'Scope': 'All',
-             'ProvideChainLinks': True}]}}
-    elif fieldFiltering == 'No':
-        ## Request specific Fields
-        fieldsName = raw_input('Input interested Field Name in the following format (BID:ASK:TRDPRC_1)')
-        quoteRequestMsg = \
-            {'RetrieveItem_Request_3': {'TrimResponse': False,
-             'ItemRequest': [{
-            'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}],
-            'Fields': fieldsName,
-            'Scope': 'List',
-            'ProvideChainLinks': True,
-            }]}}
-
-    quoteURL = 'https://api.trkd.thomsonreuters.com/api/Quotes/Quotes.svc/REST/Quotes_1/RetrieveItem_3'
+## Perform News Headline request 
+def RetrieveNewsHeadline(token, appid):
+    ##construct news headline URL and header
+    newsURL = 'https://api.trkd.thomsonreuters.com/api/News/News.svc/REST/News_1/RetrieveHeadlineML_1'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
-    
-    print '############### Sending Quote request message to TRKD ###############'
+    ##construct a news headline request message
+    ricName = raw_input('Please input Symbol: ')
+    newsRequestMsg = {'RetrieveHeadlineML_Request_1': {
+        'HeadlineMLRequest':{
+            'MaxCount':25,
+            'Filter':[
+                {
+                    'MetaDataConstraint':{
+                        'class': 'any',
+                        'Value': {
+                            'Text' : ricName
+                        }
+                    }
+                }
+            ]
+        }
+    }}
+
+    print '############### Sending News Headline request message to TRKD ###############'
     try:
         ##send request
-        quoteResult = requests.post(quoteURL, data = json.dumps(quoteRequestMsg), headers=headers)
-        if quoteResult.status_code == 200: ## success
-            print 'Quote request success'
-            print quoteResult.json()
+        newsResult = requests.post(newsURL, data = json.dumps(newsRequestMsg), headers=headers)
+        if newsResult.status_code == 200: ## success
+            print 'News Headline request success'
+            print newsResult.json()
         else: ## fail
             print 'Request fail'
-            print 'response status %s'%(quoteResult.status_code)
-            print 'Error: %s'%(quoteResult.json())
+            print 'response status %s'%(newsResult.status_code)
+            print 'Error: %s'%(newsResult.json())
 
     except requests.exceptions.RequestException as e:
         print 'Exception!!!'
         print e 
         sys.exit(1)
+
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
@@ -96,20 +91,8 @@ appid = raw_input('Please input appid: ')
 
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
+
 ## if authentiacation success, continue subscribing Quote
 if not token == None:
-    RetrieveQuotes(token,appid)
+    RetrieveNewsHeadline(token,appid)
 
-
-             
-             
-             
-             
-    
-        
-        
-        
-
-    
-   
-    
