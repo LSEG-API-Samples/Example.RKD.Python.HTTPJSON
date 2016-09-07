@@ -37,3 +37,4 @@ The best way is to get the pip package management tool
 	- trkd_quote.py
 - Version 1.0.1: 7 Sep 2016
 	- trkd_newsheadline.py
+	- changed code structure to separate call http request
