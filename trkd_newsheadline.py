@@ -13,6 +13,23 @@ import requests
 import json
 import getpass
 
+def doSendRequest(url, requestMsg, headers):
+    result = None
+    try:
+        ##send request
+        result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
+        if result.status_code == 500:
+            print 'Request fail'
+            print 'response status %s' % result.status_code
+            print 'Error: %s' % result.json()
+            sys.exit(1)
+    except requests.exceptions.RequestException, e:
+        print 'Exception!!!'
+        print e
+        sys.exit(1)
+    return result
+
+
 ## Perform authentication
 def CreateAuthorization(username, password, appid):
     token = None
@@ -21,22 +38,12 @@ def CreateAuthorization(username, password, appid):
     authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
     print '############### Sending Authentication request message to TRKD ###############'
-    try:
-        ##send request
-        result = requests.post(authenURL, data = json.dumps(authenMsg), headers=headers)
-        if result.status_code == 200: 
-            print 'Authen success'
-            print 'response status %s'%(result.status_code)
-            ##get Token
-            token = result.json()['CreateServiceToken_Response_1']['Token']
-        elif result.status_code == 500:
-            print 'Request fail'
-            print 'response status %s'%(result.status_code)
-            print 'Error: %s'%(result.json())
-    except requests.exceptions.RequestException as e:
-        print 'Exception!!!'
-        print e
-        sys.exit(1)
+    authenResult = doSendRequest(authenURL, authenMsg, headers)
+    if authenResult is not None and authenResult.status_code == 200:
+        print 'Authen success'
+        print 'response status %s'%(authenResult.status_code)
+        ##get Token
+        token = authenResult.json()['CreateServiceToken_Response_1']['Token']
     
     return token
 
@@ -64,21 +71,10 @@ def RetrieveNewsHeadline(token, appid):
     }}
 
     print '############### Sending News Headline request message to TRKD ###############'
-    try:
-        ##send request
-        newsResult = requests.post(newsURL, data = json.dumps(newsRequestMsg), headers=headers)
-        if newsResult.status_code == 200: ## success
-            print 'News Headline request success'
-            print newsResult.json()
-        else: ## fail
-            print 'Request fail'
-            print 'response status %s'%(newsResult.status_code)
-            print 'Error: %s'%(newsResult.json())
-
-    except requests.exceptions.RequestException as e:
-        print 'Exception!!!'
-        print e 
-        sys.exit(1)
+    newsResult = doSendRequest(newsURL, newsRequestMsg,headers)
+    if newsResult is not None and newsResult.status_code == 200:
+        print 'News Headline response message: '
+        print newsResult.json()
 
 
 
@@ -89,10 +85,11 @@ username = raw_input('Please input username: ')
 password = getpass.getpass(prompt='Please input password: ')
 appid = raw_input('Please input appid: ')
 
+
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
 
 ## if authentiacation success, continue subscribing Quote
-if not token == None:
+if token is not None:
     RetrieveNewsHeadline(token,appid)
 
