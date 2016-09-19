@@ -41,3 +41,4 @@ The best way is to get the pip package management tool
 	- changed code structure to separate call http request 
 - Version 1.0.2: 19 Sep 2016
 	- trkd_newsstory.py
+	
