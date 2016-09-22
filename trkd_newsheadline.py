@@ -89,7 +89,7 @@ appid = raw_input('Please input appid: ')
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
 
-## if authentiacation success, continue subscribing Quote
+## if authentiacation success, continue subscribing News Headline
 if token is not None:
     RetrieveNewsHeadline(token,appid)
 

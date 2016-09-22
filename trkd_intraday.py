@@ -49,9 +49,9 @@ def CreateAuthorization(username, password, appid):
     
     return token
 
-## Perform Quote request 
+## Perform Intraday request 
 def RetrieveIntraday(token, appid):
-
+     ##construct Time Series Intraday request message
     ricName = raw_input('Please input Symbol: ')
     intradayRequestMsg = None
     fields = ['OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK'] #change your fields (support these 'OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK' fields only)
@@ -71,7 +71,7 @@ def RetrieveIntraday(token, appid):
             'MetaField': ['NAME','QOS','CCY','TZ','TZOFFSET','NAME_LL']
         }
     }
-
+    ##construct Time Series Intraday URL and header
     intradayURL = 'http://api.rkd.reuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetIntradayTimeSeries_4'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     

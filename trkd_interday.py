@@ -49,9 +49,9 @@ def CreateAuthorization(username, password, appid):
     
     return token
 
-## Perform Quote request 
+## Perform Interday request 
 def RetrieveInteraday(token, appid):
-
+    ##construct Time Series Interday request message
     ricName = raw_input('Please input Symbol: ')
     interdayRequestMsg = None
     fields = ['OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK'] #change your fields (support these 'OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK' fields only)
@@ -71,7 +71,7 @@ def RetrieveInteraday(token, appid):
             'MetaField': ['NAME','QOS','CCY','TZ','TZOFFSET','NAME_LL']
         }
     }
-
+    ##construct Time Series Interday URL and header
     interdayURL = 'http://api.rkd.reuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetInterdayTimeSeries_4'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
@@ -91,7 +91,7 @@ appid = raw_input('Please input appid: ')
 
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
-## if authentiacation success, continue subscribing Time Series intraday
+## if authentiacation success, continue subscribing Time Series interday
 if token is not None:
     RetrieveInteraday(token,appid)
 

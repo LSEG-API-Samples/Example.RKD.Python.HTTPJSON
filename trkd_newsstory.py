@@ -49,10 +49,10 @@ def CreateAuthorization(username, password, appid):
 
 ## Perform News Story request 
 def RetrieveNewsStory(token, appid):
-    ##construct news headline URL and header
+    ##construct news story URL and header
     newsURL = 'http://api.rkd.reuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
-    ##construct a news headline story message
+    ##construct a news story request message
     storyid = raw_input('Please input news story id: ')
     newsRequestMsg = {'RetrieveStoryML_Request_1': {
         'StoryMLRequest':{
@@ -78,7 +78,7 @@ appid = raw_input('Please input appid: ')
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
 
-## if authentiacation success, continue subscribing Quote
+## if authentiacation success, continue subscribing News Story
 if token is not None:
     RetrieveNewsStory(token,appid)
 

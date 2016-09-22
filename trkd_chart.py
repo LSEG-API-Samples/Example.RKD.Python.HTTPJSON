@@ -50,10 +50,11 @@ def CreateAuthorization(username, password, appid):
     
     return token
 
-## Perform Quote request 
+## Perform Chart request 
 def RetrieveChart(token, appid):
-    
+    ##construct a Chart request message
     ricName = raw_input('Please input Symbol: ')
+
     chartRequestMsg = {'GetChart_Request_2': {'chartRequest': {
     'TimeSeries': {'TimeSeriesRequest_typehint': ['TimeSeriesRequest'],
                    'TimeSeriesRequest': [{'Symbol': ricName,
@@ -270,15 +271,16 @@ def RetrieveChart(token, appid):
     'Culture': 'en-US',
     'ReturnPrivateNetworkURL': False,
     }}}
-
-    interdayURL = 'http://api.rkd.reuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2'
+    ##construct Chart URL and header
+    chartURL = 'http://api.rkd.reuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
     print '############### Sending Chart request message to TRKD ###############'
-    chartResult = doSendRequest(interdayURL, chartRequestMsg,headers)
+    chartResult = doSendRequest(chartURL, chartRequestMsg,headers)
     if chartResult is not None and chartResult.status_code == 200:
         print 'Time Series Interday response message: '
         print chartResult.json()
+        ##print returned server, tag and image url
         server = chartResult.json()['GetChart_Response_2']['ChartImageResult']['Server']
         print '\nServer: %s'%(server)
         tag = chartResult.json()['GetChart_Response_2']['ChartImageResult']['Tag']
@@ -287,12 +289,16 @@ def RetrieveChart(token, appid):
         print 'Url: %s'%(imageUrl)
         return imageUrl
 
+##download image url from the TRKD Chart service as chart.png
 def downloadChartImage(chartURL):
+    ##create header
     user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
     headers = { 'User-Agent' : user_agent }
     print '\nDownlading chart.png file from %s'%(chartURL)
+    ##download image using Python urllib2
     downloadResult = urllib2.Request(chartURL, headers=headers)
     imgData = urllib2.urlopen(downloadResult).read()
+    ##write file
     fileName = './chart.png'
     with open(fileName,'wb') as outfile:
         outfile.write(imgData)
@@ -309,9 +315,10 @@ appid = raw_input('Please input appid: ')
 
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
-## if authentiacation success, continue subscribing Time Series intraday
+## if authentiacation success, continue subscribing Chart
 if token is not None:
     chartURL = RetrieveChart(token,appid)
+    ## if chart request success, continue downloading Chart image
     if chartURL is not None:
         print '############### Downloading Chart file from TRKD ###############'
         downloadChartImage(chartURL)

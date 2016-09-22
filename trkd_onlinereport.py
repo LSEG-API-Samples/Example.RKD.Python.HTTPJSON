@@ -47,12 +47,12 @@ def CreateAuthorization(username, password, appid):
     
     return token
 
-## Perform News Headline request 
+## Perform Online Report request 
 def RetrieveOnlineReport(token, appid):
-    ##construct news headline URL and header
+    ##construct Online Report URL and header
     onlinereportURL = 'http://api.rkd.reuters.com/api/OnlineReports/OnlineReports.svc/REST/OnlineReports_1/GetSummaryByTopic_1'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
-    ##construct a news headline request message
+    ##construct a Online Report request message
     onelinereportRequestMsg = {'GetSummaryByTopic_Request_1': {
         'Topic': 'OLRUTOPNEWS',
         'MaxCount': 20,
@@ -62,7 +62,7 @@ def RetrieveOnlineReport(token, appid):
     print '############### Sending News - Online Report request message to TRKD ###############'
     onlinereportResult = doSendRequest(onlinereportURL, onelinereportRequestMsg,headers)
     if onlinereportResult is not None and onlinereportResult.status_code == 200:
-        print 'News Headline response message: '
+        print 'Online Report response message: '
         print onlinereportResult.json()
 
 
@@ -77,7 +77,7 @@ appid = raw_input('Please input appid: ')
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
 
-## if authentiacation success, continue subscribing Quote
+## if authentiacation success, continue subscribing Online Report
 if token is not None:
     RetrieveOnlineReport(token,appid)
 
