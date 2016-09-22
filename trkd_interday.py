@@ -50,17 +50,17 @@ def CreateAuthorization(username, password, appid):
     return token
 
 ## Perform Quote request 
-def RetrieveIntraday(token, appid):
+def RetrieveInteraday(token, appid):
 
     ricName = raw_input('Please input Symbol: ')
-    intradayRequestMsg = None
+    interdayRequestMsg = None
     fields = ['OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK'] #change your fields (support these 'OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK' fields only)
-    startTime = '2016-09-12T00:00:00' #change your StartTime
-    endtime = '2016-09-19T23:59:00'  #change your EndTime
-    #interval = 'MINUTE' # change your interval between 'MINUTE', '5MINUTES', '30MINUTES' and 'HOUR'
-    interval = raw_input('Input interested interval (\'MINUTE\' or \'5MINUTES\' or \'30MINUTES\' or \'HOUR\'): ')
-    intradayRequestMsg = {
-        'GetIntradayTimeSeries_Request_4':{
+    startTime = '2015-09-22T00:00:00' #change your StartTime
+    endtime = '2016-09-22T23:59:00'  #change your EndTime
+    #interval = 'DAILY' # change your interval between 'DAILY', 'WEEKLY', 'MONTHLY', 'QUARTERLY' and 'ANNUAL'
+    interval = raw_input('Input interested interval (\'DAILY\' or \'WEEKLY\' or \'MONTHLY\' or \'QUARTERLY\' or \'ANNUAL\'): ')
+    interdayRequestMsg = {
+        'GetInterdayTimeSeries_Request_4':{
             'Field': fields,
             'TrimResponse': True,
             'Symbol': ricName,
@@ -72,14 +72,14 @@ def RetrieveIntraday(token, appid):
         }
     }
 
-    intradayURL = 'http://api.rkd.reuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetIntradayTimeSeries_4'
+    interdayURL = 'http://api.rkd.reuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetInterdayTimeSeries_4'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
-    print '############### Sending Time Series Intraday request message to TRKD ###############'
-    intradayResult = doSendRequest(intradayURL, intradayRequestMsg,headers)
-    if intradayResult is not None and intradayResult.status_code == 200:
-        print 'Time Series Intraday response message: '
-        print intradayResult.json()
+    print '############### Sending Time Series Interday request message to TRKD ###############'
+    interdayResult = doSendRequest(interdayURL, interdayRequestMsg,headers)
+    if interdayResult is not None and interdayResult.status_code == 200:
+        print 'Time Series Interday response message: '
+        print interdayResult.json()
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
@@ -89,12 +89,11 @@ username = raw_input('Please input username: ')
 password = getpass.getpass(prompt='Please input password: ')
 appid = raw_input('Please input appid: ')
 
-
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
 ## if authentiacation success, continue subscribing Time Series intraday
 if token is not None:
-    RetrieveIntraday(token,appid)
+    RetrieveInteraday(token,appid)
 
 
              
