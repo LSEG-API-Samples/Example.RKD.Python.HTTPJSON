@@ -52,39 +52,21 @@ def CreateAuthorization(username, password, appid):
 ## Perform Quote request 
 def RetrieveIntraday(token, appid):
 
-    ''''
-    ricName = raw_input('Please input Symbol: ')
-    fieldFiltering = raw_input('Subscribe all Field? (Yes|No)')
-    intradayRequestMsg = None
-    fieldsName = 'CF_LAST:CF_HIGH:CF_LOW:CF_BID:CF_ASK:CF_YIELD:CF_SOURCE:CF_SRC_PAGE:CF_LOTSIZE:CF_DATE:CF_TIME:CF_TICK:CF_NETCHNG:CF_EXCHNG:CF_VOLUME:CF_CLOSE:CF_OPEN:CF_NAME:CF_CURRENCY'
-    if fieldFiltering == 'Yes':
-        ## Request all Fields
-        intradayRequestMsg = \
-            {'RetrieveItem_Request_3': {'TrimResponse': False,
-             'ItemRequest': [{'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}], 'Scope': 'All',
-             'ProvideChainLinks': True}]}}
-    elif fieldFiltering == 'No':
-        ## Request specific Fields
-        fieldsName = raw_input('Input interested Field Name in the following format (BID:ASK:TRDPRC_1)')
-        intradayRequestMsg = \
-            {'RetrieveItem_Request_3': {'TrimResponse': False,
-             'ItemRequest': [{
-            'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}],
-            'Fields': fieldsName,
-            'Scope': 'List',
-            'ProvideChainLinks': True,
-            }]}}
-    '''
     ricName = raw_input('Please input Symbol: ')
     intradayRequestMsg = None
+    fields = ['OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK'] #change your fields (support these 'OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK' fields only)
+    startTime = '2016-09-12T00:00:00' #change your StartTime
+    endtime = '2016-09-19T23:59:00'  #change your EndTime
     intradayRequestMsg = {
         'GetIntradayTimeSeries_Request_4':{
-            'Field': ['OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK'],
+            'Field': fields,
             'TrimResponse': True,
             'Symbol': ricName,
-            'StartTime':'2016-09-12T00:00:00',
-            'EndTime':'2016-09-19T23:59:00',
-            'Interval':'MINUTE'
+            'StartTime':startTime,
+            'EndTime':endtime,  
+            'Interval':'MINUTE',
+            'TrimResponse': True,
+            'MetaField': ['NAME','QOS','CCY','TZ','TZOFFSET','NAME_LL']
         }
     }
 
