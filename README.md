@@ -6,6 +6,8 @@ This is an example project that shows how to implement TRKD REST Client with pyt
 - trkd_newsstory.py: An example application that shows how to subscribe the News Story data from TRKD service
 - trkd_intraday.py: An example application that shows how to subscribe the Intraday Time-series data from TRKD service
 - trkd_interday.py: An example application that shows how to subscribe the Interday Time-series data from TRKD service
+- trkd_onlinereport.py: An example application that shows how to subscribe the Online Report data from TRKD service
+- trkd_chart.py: An example application that shows how to subscribe and download the Chart image data from TRKD service
 
 
 #prerequisite
@@ -46,4 +48,6 @@ The best way is to get the pip package management tool
 - version 1.0.3: 22 Sep 2016
 	- trkd_intraday.py
 	- trkd_interday.py
+	- trkd_onlinereport.py
+	- trkd_chart.py
 	
