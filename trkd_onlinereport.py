@@ -47,24 +47,23 @@ def CreateAuthorization(username, password, appid):
     
     return token
 
-## Perform News Story request 
-def RetrieveNewsStory(token, appid):
-    ##construct news story URL and header
-    newsURL = 'http://api.rkd.reuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
+## Perform Online Report request 
+def RetrieveOnlineReport(token, appid):
+    ##construct Online Report URL and header
+    onlinereportURL = 'http://api.rkd.reuters.com/api/OnlineReports/OnlineReports.svc/REST/OnlineReports_1/GetSummaryByTopic_1'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
-    ##construct a news story request message
-    storyid = raw_input('Please input news story id: ')
-    newsRequestMsg = {'RetrieveStoryML_Request_1': {
-        'StoryMLRequest':{
-            'StoryId':[storyid]
+    ##construct a Online Report request message
+    onelinereportRequestMsg = {'GetSummaryByTopic_Request_1': {
+        'Topic': 'OLRUTOPNEWS',
+        'MaxCount': 20,
+        'ReturnPrivateNetworkURL': False
         }
-    }}
-
-    print '############### Sending News Story request message to TRKD ###############'
-    newsResult = doSendRequest(newsURL, newsRequestMsg,headers)
-    if newsResult is not None and newsResult.status_code == 200:
-        print 'News Story response message: '
-        print newsResult.json()
+    }
+    print '############### Sending News - Online Report request message to TRKD ###############'
+    onlinereportResult = doSendRequest(onlinereportURL, onelinereportRequestMsg,headers)
+    if onlinereportResult is not None and onlinereportResult.status_code == 200:
+        print 'Online Report response message: '
+        print onlinereportResult.json()
 
 
 
@@ -78,7 +77,7 @@ appid = raw_input('Please input appid: ')
 token = CreateAuthorization(username,password,appid)
 print 'Token = %s'%(token)
 
-## if authentiacation success, continue subscribing News Story
+## if authentiacation success, continue subscribing Online Report
 if token is not None:
-    RetrieveNewsStory(token,appid)
+    RetrieveOnlineReport(token,appid)
 
