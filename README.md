@@ -27,7 +27,7 @@ $>python <application>.py
 #Optional - How to install requests
 The best way is to get the pip package management tool 
 1. export <Python_folder>\Scripts to your OS PATH environment
-2. call pip command to install lxml
+2. call pip command to install requests
 	```
 	$>pip install requests
 	```
