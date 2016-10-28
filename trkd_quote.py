@@ -71,7 +71,7 @@ def RetrieveQuotes(token, appid):
             'RequestKey': [{'Name': ricName, 'NameType': 'RIC'}],
             'Fields': fieldsName,
             'Scope': 'List',
-            'ProvideChainLinks': True,
+            'ProvideChainLinks': True
             }]}}
 
     quoteURL = 'https://api.trkd.thomsonreuters.com/api/Quotes/Quotes.svc/REST/Quotes_1/RetrieveItem_3'

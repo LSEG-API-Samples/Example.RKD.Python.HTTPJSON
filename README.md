@@ -8,6 +8,7 @@ This is an example project that shows how to implement TRKD REST Client with pyt
 - trkd_interday.py: An example application that shows how to subscribe the Interday Time-series data from TRKD service
 - trkd_onlinereport.py: An example application that shows how to subscribe the Online Report data from TRKD service
 - trkd_chart.py: An example application that shows how to subscribe and download the Chart image data from TRKD service
+- docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications 
 
 
 #prerequisite
@@ -23,11 +24,10 @@ Run the script via the command line (or shell)
 $>python <application>.py
 ```
 
-
 #Optional - How to install requests
 The best way is to get the pip package management tool 
 1. export <Python_folder>\Scripts to your OS PATH environment
-2. call pip command to install lxml
+2. call pip command to install requests
 	```
 	$>pip install requests
 	```
@@ -50,4 +50,7 @@ The best way is to get the pip package management tool
 	- trkd_interday.py
 	- trkd_onlinereport.py
 	- trkd_chart.py
+- version 1.0.4: 28 Oct 2016
+	- docs\TRKD_REST_with_Python.docx
+	- revise some code
 	
