@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 This is an example project that shows how to implement TRKD REST Client with python
 - trkd_authen.py: An example application that shows how to authenticate with TRKD service
 - trkd_quote.py: An example application that shows how to subscribe (all fields and specific fields) the Quote data from TRKD service
@@ -11,20 +11,20 @@ This is an example project that shows how to implement TRKD REST Client with pyt
 - docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications 
 
 
-#prerequisite
+# prerequisite
 The following softwares are required to use this script
 - Python 2.7.10
 - The [requests](http://docs.python-requests.org/en/master/) library 
 
 The script does not support Python 3!
 
-#how to run the script
+# how to run the script
 Run the script via the command line (or shell)
 ```
 $>python <application>.py
 ```
 
-#Optional - How to install requests
+# Optional - How to install requests
 The best way is to get the pip package management tool 
 1. export <Python_folder>\Scripts to your OS PATH environment
 2. call pip command to install requests
@@ -53,4 +53,6 @@ The best way is to get the pip package management tool
 - version 1.0.4: 28 Oct 2016
 	- docs\TRKD_REST_with_Python.docx
 	- revise some code
+- version 1.0.5: 27 Apr 2017
+	- revies README.md to support markdown
 	
