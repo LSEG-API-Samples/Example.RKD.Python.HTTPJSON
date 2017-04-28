@@ -13,10 +13,10 @@ This is an example project that shows how to implement TRKD REST Client with pyt
 
 # prerequisite
 The following softwares are required to use this script
-- Python 2.7.10
+- Python 2.7.10 or above
 - The [requests](http://docs.python-requests.org/en/master/) library 
 
-The script does not support Python 3!
+The scripts support Python 2 only
 
 # how to run the script
 Run the script via the command line (or shell)
@@ -36,6 +36,17 @@ The best way is to get the pip package management tool
 	export https_proxy="http://<proxy.server>:<port>"
 	$>pip install requests
 	```
+# Optional - How to run with Python 3
+You can modify the scripts to run with Python 3 (with requests library installed) by just change the code from "**raw_input()**" to "**input()**" as the following example
+	- Python 2
+	```
+	username = raw_input('Please input username: ')
+	```
+	- Python 3
+	```
+	username = input('Please input username: ')
+	```
+
 #Releae Note
 - Version 1: 6 Sep 2016
     - trkd_authen.py
