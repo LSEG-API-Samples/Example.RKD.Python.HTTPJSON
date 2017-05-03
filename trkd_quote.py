@@ -21,13 +21,13 @@ def doSendRequest(url, requestMsg, headers):
         ##send request
         result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
         if result.status_code == 500:
-            print 'Request fail'
-            print 'response status %s' % result.status_code
-            print 'Error: %s' % result.json()
+            print('Request fail')
+            print('response status %s' % result.status_code)
+            print('Error: %s' % result.json())
             sys.exit(1)
     except requests.exceptions.RequestException, e:
-        print 'Exception!!!'
-        print e
+        print('Exception!!!')
+        print(e)
         sys.exit(1)
     return result
 
@@ -39,11 +39,11 @@ def CreateAuthorization(username, password, appid):
     authenMsg = {'CreateServiceToken_Request_1': { 'ApplicationID':appid, 'Username':username,'Password':password }}
     authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
-    print '############### Sending Authentication request message to TRKD ###############'
+    print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
     if authenResult is not None and authenResult.status_code == 200:
-        print 'Authen success'
-        print 'response status %s'%(authenResult.status_code)
+        print('Authen success')
+        print('response status %s'%(authenResult.status_code))
         ##get Token
         token = authenResult.json()['CreateServiceToken_Response_1']['Token']
     
@@ -77,7 +77,7 @@ def RetrieveQuotes(token, appid):
     quoteURL = 'https://api.trkd.thomsonreuters.com/api/Quotes/Quotes.svc/REST/Quotes_1/RetrieveItem_3'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
-    print '############### Sending Quote request message to TRKD ###############'
+    print('############### Sending Quote request message to TRKD ###############')
     quoteResult = doSendRequest(quoteURL, quoteRequestMsg,headers)
     if quoteResult is not None and quoteResult.status_code == 200:
         print 'Quote response message: '
@@ -85,18 +85,19 @@ def RetrieveQuotes(token, appid):
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
-##Get username, password and applicationid
-username = raw_input('Please input username: ')
-##use getpass.getpass to hide user inputted password
-password = getpass.getpass(prompt='Please input password: ')
-appid = raw_input('Please input appid: ')
 
+if __name__ == '__main__':
+    ## Get username, password and applicationid
+    username = raw_input('Please input username: ')
+    ## use getpass.getpass to hide user inputted password
+    password = getpass.getpass(prompt='Please input password: ')
+    appid = raw_input('Please input appid: ')
 
-token = CreateAuthorization(username,password,appid)
-print 'Token = %s'%(token)
-## if authentiacation success, continue subscribing Quote
-if token is not None:
-    RetrieveQuotes(token,appid)
+    token = CreateAuthorization(username,password,appid)
+    print('Token = %s'%(token))
+    ## if authentiacation success, continue subscribing Quote
+    if token is not None:
+        RetrieveQuotes(token,appid)
 
 
              
