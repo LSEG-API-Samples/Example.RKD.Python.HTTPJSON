@@ -78,13 +78,10 @@ def RetrieveNewsStory(token, appid):
 
 if __name__ == '__main__':
     # Get username, password and applicationid
-    #username = raw_input('Please input username: ')
+    username = raw_input('Please input username: ')
     # use getpass.getpass to hide user inputted password
-    #password = getpass.getpass(prompt='Please input password: ')
-    #appid = raw_input('Please input appid: ')
-    username = 'trcsmnldauki@thomsonreuters.com'
-    appid = 'rkdapi'
-    password = 'Welcome1'
+    password = getpass.getpass(prompt='Please input password: ')
+    appid = raw_input('Please input appid: ')
 
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))
