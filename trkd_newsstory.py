@@ -13,72 +13,82 @@ import requests
 import json
 import getpass
 
+
 def doSendRequest(url, requestMsg, headers):
     result = None
     try:
-        ##send request
-        result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
-        if result.status_code == 500:
-            print 'Request fail'
-            print 'response status %s' % result.status_code
-            print 'Error: %s' % result.json()
-            sys.exit(1)
+        # send request
+        result = requests.post(
+            url, data=json.dumps(requestMsg), headers=headers)
+        # handle error
+        if result.status_code is not 200:
+            print('Request fail')
+            print('response status %s' % (result.status_code))
+            if result.status_code == 500:  # if username or password or appid is wrong
+                print('Error: %s' % (result.json()))
+            result.raise_for_status()
     except requests.exceptions.RequestException, e:
-        print 'Exception!!!'
-        print e
+        print('Exception!!!')
+        print(e)
         sys.exit(1)
     return result
 
 
-## Perform authentication
+# Perform authentication
 def CreateAuthorization(username, password, appid):
     token = None
-    ##create authentication request URL, message and header
-    authenMsg = {'CreateServiceToken_Request_1': { 'ApplicationID':appid, 'Username':username,'Password':password }}
+    # create authentication request URL, message and header
+    authenMsg = {'CreateServiceToken_Request_1': {
+        'ApplicationID': appid, 'Username': username, 'Password': password}}
     authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
     print '############### Sending Authentication request message to TRKD ###############'
     authenResult = doSendRequest(authenURL, authenMsg, headers)
     if authenResult is not None and authenResult.status_code == 200:
-        print 'Authen success'
-        print 'response status %s'%(authenResult.status_code)
-        ##get Token
+        print('Authen success')
+        print('response status %s' % (authenResult.status_code))
+        # get Token
         token = authenResult.json()['CreateServiceToken_Response_1']['Token']
-    
+
     return token
 
-## Perform News Story request 
+# Perform News Story request
 def RetrieveNewsStory(token, appid):
-    ##construct news story URL and header
+    # construct news story URL and header
     newsURL = 'http://api.rkd.reuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
-    headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
-    ##construct a news story request message
+    headers = {'content-type': 'application/json;charset=utf-8',
+               'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
+    # construct a news story request message
     storyid = raw_input('Please input news story id: ')
     newsRequestMsg = {'RetrieveStoryML_Request_1': {
-        'StoryMLRequest':{
-            'StoryId':[storyid]
+        'StoryMLRequest': {
+            'StoryId': [storyid]
         }
     }}
 
-    print '############### Sending News Story request message to TRKD ###############'
-    newsResult = doSendRequest(newsURL, newsRequestMsg,headers)
+    print('############### Sending News Story request message to TRKD ###############')
+    newsResult = doSendRequest(newsURL, newsRequestMsg, headers)
     if newsResult is not None and newsResult.status_code == 200:
-        print 'News Story response message: '
-        print newsResult.json()
+        print('News Story response message: ')
+        print(newsResult.json())
 
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
-##Get username, password and applicationid
-username = raw_input('Please input username: ')
-##use getpass.getpass to hide user inputted password
-password = getpass.getpass(prompt='Please input password: ')
-appid = raw_input('Please input appid: ')
 
-token = CreateAuthorization(username,password,appid)
-print 'Token = %s'%(token)
+if __name__ == '__main__':
+    # Get username, password and applicationid
+    #username = raw_input('Please input username: ')
+    # use getpass.getpass to hide user inputted password
+    #password = getpass.getpass(prompt='Please input password: ')
+    #appid = raw_input('Please input appid: ')
+    username = 'trcsmnldauki@thomsonreuters.com'
+    appid = 'rkdapi'
+    password = 'Welcome1'
 
-## if authentiacation success, continue subscribing News Story
-if token is not None:
-    RetrieveNewsStory(token,appid)
+    token = CreateAuthorization(username, password, appid)
+    print('Token = %s' % (token))
 
+    # if authentiacation success, continue subscribing News Story
+    if token is not None:
+        RetrieveNewsStory(token, appid)
