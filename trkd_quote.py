@@ -14,17 +14,24 @@ import requests
 import json
 import getpass
 
-
+# Send HTTP request for all services
 def doSendRequest(url, requestMsg, headers):
     result = None
     try:
         ##send request
         result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
-        if result.status_code == 500:
+        ## handle error
+        if result.status_code is not 200:
             print('Request fail')
-            print('response status %s' % result.status_code)
-            print('Error: %s' % result.json())
-            sys.exit(1)
+            print('response status %s'%(result.status_code))
+            if result.status_code == 500: ## if username or password or appid is wrong
+                print('Error: %s'%(result.json()))
+            result.raise_for_status()
+        #if result.status_code == 500:
+            #print('Request fail')
+            #print('response status %s' % result.status_code)
+            #print('Error: %s' % result.json())
+            #sys.exit(1)
     except requests.exceptions.RequestException, e:
         print('Exception!!!')
         print(e)
