@@ -14,7 +14,7 @@ import requests
 import json
 import getpass
 
-
+# Send HTTP request for all services
 def doSendRequest(url, requestMsg, headers):
     result = None
     try:

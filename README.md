@@ -30,7 +30,7 @@ $>python <application>.py
 ```
 
 ## Optional - How to install requests
-The best way is to get the pip package management tool 
+The best way is via the pip package management tool 
 1. export <Python_folder>\Scripts to your OS PATH environment
 2. call pip command to install requests
 	```
@@ -75,4 +75,7 @@ You can modify the scripts to run with Python 3 (with requests library installed
 	- revies README.md
 	- modify trkd_authen.py
 	- modify trkd_quote.py
+- version 1.0.7: 9 May 2017
+	- revies README.md
+	- modify the rest of application files
 	
