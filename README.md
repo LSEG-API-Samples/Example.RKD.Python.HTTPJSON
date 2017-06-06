@@ -13,13 +13,13 @@ This is an example project that shows how to implement TRKD HTTP JSON Client wit
 - trkd_interday.py: An example application that shows how to subscribe the Interday Time-series data from TRKD service
 - trkd_onlinereport.py: An example application that shows how to subscribe the Online Report data from TRKD service
 - trkd_chart.py: An example application that shows how to subscribe and download the Chart image data from TRKD service
-- docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications 
+- docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications
 
 
 ## Prerequisite
 The following softwares are required to use this script
 - Python 2.7.10 or above
-- The [requests](http://docs.python-requests.org/en/master/) library 
+- The [requests](http://docs.python-requests.org/en/master/) library
 
 The scripts are based on Python 2 but you can modify it to run with Python 3 (see "Optional - How to run with Python 3" section).
 
@@ -30,7 +30,7 @@ $>python <application>.py
 ```
 
 ## Optional - How to install requests
-The best way is via the pip package management tool 
+The best way is via the pip package management tool
 1. export <Python_folder>\Scripts to your OS PATH environment
 2. call pip command to install requests
 	```
@@ -43,14 +43,14 @@ The best way is via the pip package management tool
 	```
 ## Optional - How to run with Python 3
 You can modify the scripts to run with Python 3 (with requests library installed) by just change the code from "**raw_input()**" to "**input()**" as the following example
-	- Python 2
-	```
-	username = raw_input('Please input username: ')
-	```
-	- Python 3
-	```
-	username = input('Please input username: ')
-	```
+- Python 2
+```
+username = raw_input('Please input username: ')
+```
+- Python 3
+```
+username = input('Please input username: ')
+```
 
 ## Release Note
 - Version 1: 6 Sep 2016
@@ -58,7 +58,7 @@ You can modify the scripts to run with Python 3 (with requests library installed
 	- trkd_quote.py
 - Version 1.0.1: 7 Sep 2016
 	- trkd_newsheadline.py
-	- changed code structure to separate call http request 
+	- changed code structure to separate call http request
 - Version 1.0.2: 19 Sep 2016
 	- trkd_newsstory.py
 - version 1.0.3: 22 Sep 2016
@@ -78,4 +78,3 @@ You can modify the scripts to run with Python 3 (with requests library installed
 - version 1.0.7: 9 May 2017
 	- revies README.md
 	- modify the rest of application files
-	

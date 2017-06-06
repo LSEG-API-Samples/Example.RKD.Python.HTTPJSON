@@ -1,10 +1,10 @@
 '''
-The TRKD API sample code is provided for informational purposes only 
-and without knowledge or assumptions of the end users development environment. 
-We offer this code to provide developers practical and useful guidance while developing their own code. 
-However, we do not offer support and troubleshooting of issues that are related to the use of this code 
-in a particular environment; it is offered solely as sample code for guidance. 
-Please see the Thomson Reuters Knowledge Direct product page at http://customers.thomsonreuters.com 
+The TRKD API sample code is provided for informational purposes only
+and without knowledge or assumptions of the end users development environment.
+We offer this code to provide developers practical and useful guidance while developing their own code.
+However, we do not offer support and troubleshooting of issues that are related to the use of this code
+in a particular environment; it is offered solely as sample code for guidance.
+Please see the Thomson Reuters Knowledge Direct product page at http://customers.thomsonreuters.com
 for additional information regarding the TRKD API.'''
 
 import os
@@ -47,10 +47,10 @@ def CreateAuthorization(username, password, appid):
         print('response status %s'%(authenResult.status_code))
         ##get Token
         token = authenResult.json()['CreateServiceToken_Response_1']['Token']
-    
+
     return token
 
-## Perform News Headline request 
+## Perform News Headline request
 def RetrieveNewsHeadline(token, appid):
     ##construct news headline URL and header
     newsURL = 'https://api.trkd.thomsonreuters.com/api/News/News.svc/REST/News_1/RetrieveHeadlineML_1'
@@ -59,7 +59,7 @@ def RetrieveNewsHeadline(token, appid):
     ricName = raw_input('Please input Symbol: ')
     newsRequestMsg = {'RetrieveHeadlineML_Request_1': {
         'HeadlineMLRequest':{
-            'MaxCount':25,
+            'MaxCount':10,
             'Filter':[
                 {
                     'MetaDataConstraint':{
@@ -96,4 +96,3 @@ if __name__ == '__main__':
     ## if authentiacation success, continue subscribing News Headline
     if token is not None:
         RetrieveNewsHeadline(token,appid)
-
