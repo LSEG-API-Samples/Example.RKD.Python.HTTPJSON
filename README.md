@@ -2,7 +2,7 @@
 ## Overview
 The [Thomson Reuters Knowledge Direct (TRKD) API](https://developers.thomsonreuters.com/thomson-reuters-knowledge-direct-trkd) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
 
-TRKD offers a wide range of Thomson Reuters' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct.Level 2. All data are snapshot (non-streaming) data.
+TRKD offers a wide range of Thomson Reuters' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
 This is an example project that shows how to implement TRKD HTTP JSON Client with python. This project contains the following example scripts for each TRKD services
 - trkd_authen.py: An example application that shows how to authenticate with TRKD service
@@ -18,7 +18,7 @@ This is an example project that shows how to implement TRKD HTTP JSON Client wit
 
 ## Prerequisite
 The following softwares are required to use this script
-- Python 2.7.10 or above
+- Python 2.7
 - The [requests](http://docs.python-requests.org/en/master/) library
 
 The scripts are based on Python 2 but you can modify it to run with Python 3 (see "Optional - How to run with Python 3" section).
@@ -76,5 +76,7 @@ username = input('Please input username: ')
 	- modify trkd_authen.py
 	- modify trkd_quote.py
 - version 1.0.7: 9 May 2017
-	- revies README.md
+	- revise README.md
 	- modify the rest of application files
+- version 1.0.7: 31 Aug 2017
+	- revise README.md
