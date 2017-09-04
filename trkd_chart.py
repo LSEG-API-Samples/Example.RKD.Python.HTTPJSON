@@ -13,7 +13,7 @@ import sys
 import requests
 import json
 import getpass
-import urllib2
+import urllib
 
 # Send HTTP request for all services
 def doSendRequest(url, requestMsg, headers):
@@ -28,7 +28,7 @@ def doSendRequest(url, requestMsg, headers):
             if result.status_code == 500: ## if username or password or appid is wrong
                 print('Error: %s'%(result.json()))
             result.raise_for_status()
-    except requests.exceptions.RequestException, e:
+    except requests.exceptions.RequestException as e:
         print('Exception!!!')
         print(e)
         sys.exit(1)
@@ -55,8 +55,7 @@ def CreateAuthorization(username, password, appid):
 ## Perform Chart request 
 def RetrieveChart(token, appid):
     ##construct a Chart request message
-    ricName = raw_input('Please input Symbol: ')
-
+    ricName = input('Please input Symbol: ')
     chartRequestMsg = {'GetChart_Request_2': {'chartRequest': {
     'TimeSeries': {'TimeSeriesRequest_typehint': ['TimeSeriesRequest'],
                    'TimeSeriesRequest': [{'Symbol': ricName,
@@ -274,7 +273,7 @@ def RetrieveChart(token, appid):
     'ReturnPrivateNetworkURL': False,
     }}}
     ##construct Chart URL and header
-    chartURL = 'http://api.rkd.reuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2BB'
+    chartURL = 'http://api.trkd.thomsonreuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
     print('############### Sending Chart request message to TRKD ###############')
@@ -297,9 +296,9 @@ def downloadChartImage(chartURL):
     user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
     headers = { 'User-Agent' : user_agent }
     print('\nDownlading chart.png file from %s'%(chartURL))
-    ##download image using Python urllib2
-    downloadResult = urllib2.Request(chartURL, headers=headers)
-    imgData = urllib2.urlopen(downloadResult).read()
+    ##download image using Python3 urllib
+    downloadResult = urllib.request.Request(chartURL, headers=headers)
+    imgData = urllib.request.urlopen(downloadResult).read()
     ##write file
     fileName = './chart.png'
     with open(fileName,'wb') as outfile:
@@ -312,10 +311,10 @@ def downloadChartImage(chartURL):
 
 if __name__ == '__main__':
     ##Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     ##use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')   
 
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
@@ -326,17 +325,4 @@ if __name__ == '__main__':
         if chartURL is not None:
             print('############### Downloading Chart file from TRKD ###############')
             downloadChartImage(chartURL)
-
-
-             
-             
-             
-             
-    
-        
-        
-        
-
-    
-   
-    
+            

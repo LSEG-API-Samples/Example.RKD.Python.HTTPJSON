@@ -18,10 +18,10 @@ This is an example project that shows how to implement TRKD HTTP JSON Client wit
 
 ## Prerequisite
 The following softwares are required to use this script
-- Python 2.7
+- Python 3 
 - The [requests](http://docs.python-requests.org/en/master/) library
 
-The scripts are based on Python 2 but you can modify it to run with Python 3 (see "Optional - How to run with Python 3" section).
+All scripts are based on Python 3 and not compatible with Python 2.
 
 ## How to run the script
 Run the script via the command line (or shell)
@@ -41,16 +41,7 @@ The best way is via the pip package management tool
 	export https_proxy="http://<proxy.server>:<port>"
 	$>pip install requests
 	```
-## Optional - How to run with Python 3
-You can modify the scripts to run with Python 3 (with requests library installed) by just change the code from "**raw_input()**" to "**input()**" as the following example
-- Python 2
-```
-username = raw_input('Please input username: ')
-```
-- Python 3
-```
-username = input('Please input username: ')
-```
+
 
 ## Release Note
 - Version 1: 6 Sep 2016
@@ -80,3 +71,6 @@ username = input('Please input username: ')
 	- modify the rest of application files
 - version 1.0.7: 31 Aug 2017
 	- revise README.md
+- version 1.0.8: 04 Sep 2017
+	- Port all scripts to support Python 3
+	- Fix the issue that some scripts still send request message to the old REST endpoint.

@@ -27,7 +27,7 @@ def doSendRequest(url, requestMsg, headers):
             if result.status_code == 500:  # if username or password or appid is wrong
                 print('Error: %s' % (result.json()))
             result.raise_for_status()
-    except requests.exceptions.RequestException, e:
+    except requests.exceptions.RequestException as e:
         print('Exception!!!')
         print(e)
         sys.exit(1)
@@ -42,7 +42,7 @@ def CreateAuthorization(username, password, appid):
         'ApplicationID': appid, 'Username': username, 'Password': password}}
     authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
-    print '############### Sending Authentication request message to TRKD ###############'
+    print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
     if authenResult is not None and authenResult.status_code == 200:
         print('Authen success')
@@ -55,11 +55,11 @@ def CreateAuthorization(username, password, appid):
 # Perform News Story request
 def RetrieveNewsStory(token, appid):
     # construct news story URL and header
-    newsURL = 'http://api.rkd.reuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
+    newsURL = 'http://api.trkd.thomsonreuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
     headers = {'content-type': 'application/json;charset=utf-8',
                'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
     # construct a news story request message
-    storyid = raw_input('Please input news story id: ')
+    storyid = input('Please input news story id: ')
     newsRequestMsg = {'RetrieveStoryML_Request_1': {
         'StoryMLRequest': {
             'StoryId': [storyid]
@@ -78,10 +78,10 @@ def RetrieveNewsStory(token, appid):
 
 if __name__ == '__main__':
     # Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     # use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')
 
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))
