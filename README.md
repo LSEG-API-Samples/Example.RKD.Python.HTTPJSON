@@ -21,7 +21,7 @@ The following softwares are required to use this script
 - Python 3 
 - The [requests](http://docs.python-requests.org/en/master/) library
 
-All scripts are based on Python 3 and not compatible with Python 2.
+All scripts support Python 3 and not compatible with Python 2.
 
 ## How to run the script
 Run the script via the command line (or shell)
