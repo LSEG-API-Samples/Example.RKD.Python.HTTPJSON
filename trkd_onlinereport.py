@@ -27,7 +27,7 @@ def doSendRequest(url, requestMsg, headers):
             if result.status_code == 500:  # if username or password or appid is wrong
                 print('Error: %s' % (result.json()))
             result.raise_for_status()
-    except requests.exceptions.RequestException, e:
+    except requests.exceptions.RequestException as e:
         print('Exception!!!')
         print(e)
         sys.exit(1)
@@ -57,7 +57,7 @@ def CreateAuthorization(username, password, appid):
 
 def RetrieveOnlineReport(token, appid):
     # construct Online Report URL and header
-    onlinereportURL = 'http://api.rkd.reuters.com/api/OnlineReports/OnlineReports.svc/REST/OnlineReports_1/GetSummaryByTopic_1'
+    onlinereportURL = 'http://api.trkd.thomsonreuters.com/api/OnlineReports/OnlineReports.svc/REST/OnlineReports_1/GetSummaryByTopic_1'
     headers = {'content-type': 'application/json;charset=utf-8',
                'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
     # construct a Online Report request message
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     appid = raw_input('Please input appid: ')
 
     token = CreateAuthorization(username, password, appid)
-    print 'Token = %s' % (token)
+    print('Token = %s' % (token))
 
     # if authentiacation success, continue subscribing Online Report
     if token is not None:

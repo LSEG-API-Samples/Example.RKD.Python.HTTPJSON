@@ -32,7 +32,7 @@ def doSendRequest(url, requestMsg, headers):
             #print('response status %s' % result.status_code)
             #print('Error: %s' % result.json())
             #sys.exit(1)
-    except requests.exceptions.RequestException, e:
+    except requests.exceptions.RequestException as e:
         print('Exception!!!')
         print(e)
         sys.exit(1)
