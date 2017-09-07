@@ -42,7 +42,7 @@ def CreateAuthorization(username, password, appid):
         'ApplicationID': appid, 'Username': username, 'Password': password}}
     authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
-    print '############### Sending Authentication request message to TRKD ###############'
+    print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
     if authenResult is not None and authenResult.status_code == 200:
         print('Authen success')
@@ -80,10 +80,10 @@ def RetrieveOnlineReport(token, appid):
 
 if __name__ == '__main__':
     # Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     # use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')
 
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))

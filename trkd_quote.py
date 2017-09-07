@@ -59,8 +59,8 @@ def CreateAuthorization(username, password, appid):
 ## Perform Quote request 
 def RetrieveQuotes(token, appid):
 
-    ricName = raw_input('Please input Symbol: ')
-    fieldFiltering = raw_input('Subscribe all Field? (Yes|No)')
+    ricName = input('Please input Symbol: ')
+    fieldFiltering = input('Subscribe all Field? (Yes|No)')
     quoteRequestMsg = None
     fieldsName = 'CF_LAST:CF_HIGH:CF_LOW:CF_BID:CF_ASK:CF_YIELD:CF_SOURCE:CF_SRC_PAGE:CF_LOTSIZE:CF_DATE:CF_TIME:CF_TICK:CF_NETCHNG:CF_EXCHNG:CF_VOLUME:CF_CLOSE:CF_OPEN:CF_NAME:CF_CURRENCY'
     if fieldFiltering == 'Yes':
@@ -71,7 +71,7 @@ def RetrieveQuotes(token, appid):
              'ProvideChainLinks': True}]}}
     elif fieldFiltering == 'No':
         ## Request specific Fields
-        fieldsName = raw_input('Input interested Field Name in the following format (BID:ASK:TRDPRC_1)')
+        fieldsName = input('Input interested Field Name in the following format (BID:ASK:TRDPRC_1)')
         quoteRequestMsg = \
             {'RetrieveItem_Request_3': {'TrimResponse': False,
              'ItemRequest': [{
@@ -87,35 +87,21 @@ def RetrieveQuotes(token, appid):
     print('############### Sending Quote request message to TRKD ###############')
     quoteResult = doSendRequest(quoteURL, quoteRequestMsg,headers)
     if quoteResult is not None and quoteResult.status_code == 200:
-        print 'Quote response message: '
-        print quoteResult.json()
+        print('Quote response message: ')
+        print(quoteResult.json())
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
 
 if __name__ == '__main__':
     ## Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     ## use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')
 
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
     ## if authentiacation success, continue subscribing Quote
     if token is not None:
-        RetrieveQuotes(token,appid)
-
-
-             
-             
-             
-             
-    
-        
-        
-        
-
-    
-   
-    
+        RetrieveQuotes(token,appid)    

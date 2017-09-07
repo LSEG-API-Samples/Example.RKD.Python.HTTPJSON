@@ -15,10 +15,10 @@ import requests
 
 if __name__ == '__main__':
     ## Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     ## use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')
     print('############### Sending Authentication request message to TRKD ###############')
 
     ##create authentication request URL, message and header
@@ -50,9 +50,3 @@ if __name__ == '__main__':
         print('Exception!!!')
         print(e)
         sys.exit(1)
-
-
-
-
-
-

@@ -59,7 +59,7 @@ def RetrieveNewsStory(token, appid):
     headers = {'content-type': 'application/json;charset=utf-8',
                'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
     # construct a news story request message
-    storyid = raw_input('Please input news story id: ')
+    storyid = input('Please input news story id: ')
     newsRequestMsg = {'RetrieveStoryML_Request_1': {
         'StoryMLRequest': {
             'StoryId': [storyid]
@@ -78,10 +78,10 @@ def RetrieveNewsStory(token, appid):
 
 if __name__ == '__main__':
     # Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     # use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')
 
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))

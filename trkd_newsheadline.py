@@ -56,7 +56,7 @@ def RetrieveNewsHeadline(token, appid):
     newsURL = 'https://api.trkd.thomsonreuters.com/api/News/News.svc/REST/News_1/RetrieveHeadlineML_1'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     ##construct a news headline request message
-    ricName = raw_input('Please input Symbol: ')
+    ricName = input('Please input Symbol: ')
     newsRequestMsg = {'RetrieveHeadlineML_Request_1': {
         'HeadlineMLRequest':{
             'MaxCount':10,
@@ -85,10 +85,10 @@ def RetrieveNewsHeadline(token, appid):
 
 if __name__ == '__main__':
     ##Get username, password and applicationid
-    username = raw_input('Please input username: ')
+    username = input('Please input username: ')
     ##use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = raw_input('Please input appid: ')
+    appid = input('Please input appid: ')
 
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
