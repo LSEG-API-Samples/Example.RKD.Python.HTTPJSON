@@ -27,7 +27,7 @@ def doSendRequest(url, requestMsg, headers):
             if result.status_code == 500: ## if username or password or appid is wrong
                 print('Error: %s'%(result.json()))
             result.raise_for_status()
-    except requests.exceptions.RequestException, e:
+    except requests.exceptions.RequestException as e:
         print('Exception!!!')
         print(e)
         sys.exit(1)
@@ -74,7 +74,7 @@ def RetrieveIntraday(token, appid):
         }
     }
     ##construct Time Series Intraday URL and header
-    intradayURL = 'http://api.rkd.reuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetIntradayTimeSeries_4'
+    intradayURL = 'http://api.trkd.thomsonreuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetIntradayTimeSeries_4'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
     print('############### Sending Time Series Intraday request message to TRKD ###############')

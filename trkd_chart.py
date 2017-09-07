@@ -28,7 +28,7 @@ def doSendRequest(url, requestMsg, headers):
             if result.status_code == 500: ## if username or password or appid is wrong
                 print('Error: %s'%(result.json()))
             result.raise_for_status()
-    except requests.exceptions.RequestException, e:
+    except requests.exceptions.RequestException as e:
         print('Exception!!!')
         print(e)
         sys.exit(1)
@@ -274,7 +274,7 @@ def RetrieveChart(token, appid):
     'ReturnPrivateNetworkURL': False,
     }}}
     ##construct Chart URL and header
-    chartURL = 'http://api.rkd.reuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2BB'
+    chartURL = 'http://api.trkd.thomsonreuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
     print('############### Sending Chart request message to TRKD ###############')

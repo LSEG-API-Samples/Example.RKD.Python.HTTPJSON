@@ -21,7 +21,7 @@ The following softwares are required to use this script
 - Python 2.7
 - The [requests](http://docs.python-requests.org/en/master/) library
 
-The scripts are based on Python 2 but you can modify it to run with Python 3 (see "Optional - How to run with Python 3" section).
+The scripts support Python 2 only, not Python 3.
 
 ## How to run the script
 Run the script via the command line (or shell)
@@ -41,16 +41,6 @@ The best way is via the pip package management tool
 	export https_proxy="http://<proxy.server>:<port>"
 	$>pip install requests
 	```
-## Optional - How to run with Python 3
-You can modify the scripts to run with Python 3 (with requests library installed) by just change the code from "**raw_input()**" to "**input()**" as the following example
-- Python 2
-```
-username = raw_input('Please input username: ')
-```
-- Python 3
-```
-username = input('Please input username: ')
-```
 
 ## Release Note
 - Version 1: 6 Sep 2016
