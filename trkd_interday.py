@@ -74,10 +74,7 @@ def RetrieveInteraday(token, appid):
         }
     }
     ##construct Time Series Interday URL and header
-<<<<<<< HEAD
-=======
     #interdayURL = 'http://api.rkd.reuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetInterdayTimeSeries_4'
->>>>>>> v14_python3
     interdayURL = 'http://api.trkd.thomsonreuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetInterdayTimeSeries_4'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
