@@ -73,3 +73,5 @@ The best way is via the pip package management tool
 - version 1.0.8: 04 Sep 2017
 	- Port all scripts to support Python 3
 	- Fix the issue that some scripts still send request message to the old REST endpoint.
+- version 1.0.9: 26 Jan 2018
+	- Add debug log for checking outgoing message (disabled by default)

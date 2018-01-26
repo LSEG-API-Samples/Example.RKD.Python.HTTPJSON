@@ -20,6 +20,7 @@ def doSendRequest(url, requestMsg, headers):
     try:
         ##send request
         result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
+        # print('outgoing message is %s'%(json.dumps(requestMsg)))
         ## handle error
         if result.status_code is not 200:
             print('Request fail')
