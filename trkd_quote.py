@@ -49,7 +49,7 @@ def CreateAuthorization(username, password, appid):
     headers = {'content-type': 'application/json;charset=utf-8'}
     print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
-    if authenResult is not None and authenResult.status_code == 200:
+    if authenResult and authenResult.status_code == 200:
         print('Authen success')
         print('response status %s'%(authenResult.status_code))
         ##get Token
@@ -87,7 +87,7 @@ def RetrieveQuotes(token, appid):
     
     print('############### Sending Quote request message to TRKD ###############')
     quoteResult = doSendRequest(quoteURL, quoteRequestMsg,headers)
-    if quoteResult is not None and quoteResult.status_code == 200:
+    if quoteResult and quoteResult.status_code == 200:
         print('Quote response message: ')
         print(quoteResult.json())
 
@@ -104,5 +104,5 @@ if __name__ == '__main__':
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
     ## if authentiacation success, continue subscribing Quote
-    if token is not None:
+    if token:
         RetrieveQuotes(token,appid)    

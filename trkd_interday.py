@@ -44,7 +44,7 @@ def CreateAuthorization(username, password, appid):
     headers = {'content-type': 'application/json;charset=utf-8'}
     print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
-    if authenResult is not None and authenResult.status_code == 200:
+    if authenResult and authenResult.status_code == 200:
         print('Authen success')
         print('response status %s'%(authenResult.status_code))
         ##get Token
@@ -81,7 +81,7 @@ def RetrieveInteraday(token, appid):
     
     print('############### Sending Time Series Interday request message to TRKD ###############')
     interdayResult = doSendRequest(interdayURL, interdayRequestMsg, headers)
-    if interdayResult is not None and interdayResult.status_code == 200:
+    if interdayResult and interdayResult.status_code == 200:
         print('Time Series Interday response message: ')
         print(interdayResult.json())
 

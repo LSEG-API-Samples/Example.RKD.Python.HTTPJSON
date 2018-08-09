@@ -45,7 +45,7 @@ def CreateAuthorization(username, password, appid):
     headers = {'content-type': 'application/json;charset=utf-8'}
     print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
-    if authenResult is not None and authenResult.status_code == 200:
+    if authenResult and authenResult.status_code == 200:
         print('Authen success')
         print('response status %s' % (authenResult.status_code))
         # get Token
@@ -69,7 +69,7 @@ def RetrieveNewsStory(token, appid):
 
     print('############### Sending News Story request message to TRKD ###############')
     newsResult = doSendRequest(newsURL, newsRequestMsg, headers)
-    if newsResult is not None and newsResult.status_code == 200:
+    if newsResult and newsResult.status_code == 200:
         print('News Story response message: ')
         print(newsResult.json())
 
@@ -88,5 +88,5 @@ if __name__ == '__main__':
     print('Token = %s' % (token))
 
     # if authentiacation success, continue subscribing News Story
-    if token is not None:
+    if token:
         RetrieveNewsStory(token, appid)

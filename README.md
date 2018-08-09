@@ -75,3 +75,5 @@ The best way is via the pip package management tool
 	- Fix the issue that some scripts still send request message to the old REST endpoint.
 - version 1.0.9: 26 Jan 2018
 	- Add debug log for checking outgoing message (disabled by default)
+- version 1.0.10: 9 Aug 2018
+	- remove all ```is not None``` statements and make them a bit more **Pythonic**

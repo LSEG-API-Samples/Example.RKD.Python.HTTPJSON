@@ -320,10 +320,10 @@ if __name__ == '__main__':
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
     ## if authentiacation success, continue subscribing Chart
-    if token is not None:
+    if token:
         chartURL = RetrieveChart(token,appid)
         ## if chart request success, continue downloading Chart image
-        if chartURL is not None:
+        if chartURL:
             print('############### Downloading Chart file from TRKD ###############')
             downloadChartImage(chartURL)
             

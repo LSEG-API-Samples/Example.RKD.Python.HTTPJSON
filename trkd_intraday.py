@@ -48,7 +48,7 @@ def CreateAuthorization(username, password, appid):
     headers = {'content-type': 'application/json;charset=utf-8'}
     print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
-    if authenResult is not None and authenResult.status_code == 200:
+    if authenResult and authenResult.status_code == 200:
         print('Authen success')
         print('response status %s' % (authenResult.status_code))
         # get Token
@@ -90,7 +90,7 @@ def RetrieveIntraday(token, appid):
 
     print('############### Sending Time Series Intraday request message to TRKD ###############')
     intradayResult = doSendRequest(intradayURL, intradayRequestMsg, headers)
-    if intradayResult is not None and intradayResult.status_code == 200:
+    if intradayResult and intradayResult.status_code == 200:
         print('Time Series Intraday response message: ')
         print(intradayResult.json())
 
@@ -106,5 +106,5 @@ if __name__ == '__main__':
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))
     # if authentiacation success, continue subscribing Time Series intraday
-    if token is not None:
+    if token:
         RetrieveIntraday(token, appid)
