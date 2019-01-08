@@ -1,0 +1,3 @@
+###### Requirements Libraries ######
+requests
+websocket-client>0.49
