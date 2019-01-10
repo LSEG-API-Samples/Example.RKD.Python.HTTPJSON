@@ -19,6 +19,9 @@ import websocket
 import threading
 from threading import Thread, Event
 
+from datetime import datetime, timezone, timedelta
+import dateutil.parser
+
 
 # Global Default Variables
 ws_address = 'wss://streaming.trkd.thomsonreuters.com/WebSocket/'
@@ -34,6 +37,9 @@ password = None
 appid = None
 token = None
 expiration = None
+
+expire_time_in_seconds = None
+time_before_expire_in_seconds = 15 * 60 # 15 Minutes to Seconds
 
 ## ------------------------------------------ TRKD HTTP REST functions ------------------------------------------ ##
 
@@ -72,9 +78,16 @@ def CreateAuthorization(username, password, appid):
         print('Authentication response %s'%json.dumps(authenResult.json(), sort_keys=True, indent=2, separators=(',', ':')))
         ##get Token
         token = authenResult.json()['CreateServiceToken_Response_1']['Token']
-        expiration = authenResult.json()['CreateServiceToken_Response_1']['Expiration']
+        expiration = authenResult.json()['CreateServiceToken_Response_1']['Expiration'] # Expiration time of this session in UTC 
 
-    return token, expiration
+        ## Calcuate Expiration time
+        expire_datetime_utc = dateutil.parser.parse(expiration) ## Parse incoming Expiration to Python datetime object (UTC)
+        utc_time_now = datetime.now(timezone.utc) ## Get current machine datetime in UTC 
+
+        time_difference = expire_datetime_utc - utc_time_now ## Get time different between now and expiration time value 
+        time_difference_in_seconds = int(round(time_difference / timedelta(seconds=1))) ## convert it to second as a round int
+
+    return token, expiration, time_difference_in_seconds
 
 ## ------------------------------------------ TRKD WebSocket functions ------------------------------------------ ##
 
@@ -177,8 +190,10 @@ if __name__ == '__main__':
     password = getpass.getpass(prompt='Please input password: ')
     appid = input('Please input appid: ')
 
-    token, expiration = CreateAuthorization(username,password,appid)
-    # print('Token = %s'%(token))
+    token, expiration, expire_time_in_seconds = CreateAuthorization(username,password,appid)
+    print('Token = %s'%(token))
+    print('Expiration  = %s'%(expiration))
+    print('Expiration in next = %d seconds'%(expire_time_in_seconds))
     ## if authentiacation success, continue subscribing Quote
     if token and expiration:
         print('Do WS here')
