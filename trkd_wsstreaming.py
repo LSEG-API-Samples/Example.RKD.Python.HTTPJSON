@@ -37,6 +37,9 @@ password = None
 appid = None
 token = None
 expiration = None
+logged_in = False
+
+ric_name = 'EUR='
 
 expire_time_in_seconds = None
 time_before_expire_in_seconds = 15 * 60 # 15 Minutes to Seconds
@@ -91,7 +94,7 @@ def CreateAuthorization(username, password, appid):
 
 ## ------------------------------------------ TRKD WebSocket functions ------------------------------------------ ##
 
-def process_message(ws, message_json):
+def process_message(message_json):
     """ Parse at high level and output JSON of message """
     message_type = message_json['Type']
 
@@ -99,33 +102,36 @@ def process_message(ws, message_json):
         if 'Domain' in message_json:
             message_domain = message_json['Domain']
             if message_domain == "Login":
-                process_login_response(ws, message_json)
+                process_login_response(message_json)
     elif message_type == "Ping":
         pong_json = { 'Type':'Pong' }
-        ws.send(json.dumps(pong_json))
+        web_socket_app.send(json.dumps(pong_json))
         print("SENT:")
         print(json.dumps(pong_json, sort_keys=True, indent=2, separators=(',', ':')))
 
 
-def process_login_response(ws, message_json):
+def process_login_response(message_json):
     """ Send item request """
-    send_market_price_request(ws)
+    global logged_in
+
+    logged_in = True
+    send_market_price_request(ric_name)
 
 
-def send_market_price_request(ws):
+def send_market_price_request(ric_name):
     """ Create and send simple Market Price request """
     mp_req_json = {
         'ID': 2,
         'Key': {
-            'Name': 'EUR=',
+            'Name': ric_name,
         },
     }
-    ws.send(json.dumps(mp_req_json))
+    web_socket_app.send(json.dumps(mp_req_json))
     print("SENT:")
     print(json.dumps(mp_req_json, sort_keys=True, indent=2, separators=(',', ':')))
 
 
-def send_login_request(ws):
+def send_login_request(is_refresh_token=False):
     """ Generate a login request from command line data (or defaults) and send """
     login_json = {
         'ID': 1,
@@ -146,40 +152,44 @@ def send_login_request(ws):
     login_json['Key']['Elements']['Position'] = position
     login_json['Key']['Elements']['AuthenticationToken'] = token
 
-    ws.send(json.dumps(login_json))
+    # If the token is a refresh token, this is not our first login attempt.
+    if is_refresh_token:
+        login_json['Refresh'] = False
+
+    web_socket_app.send(json.dumps(login_json))
     print("SENT:")
     print(json.dumps(login_json, sort_keys=True, indent=2, separators=(',', ':')))
 
 
-def on_message(ws, message):
+def on_message(_, message):
     """ Called when message received, parse message into JSON for processing """
     print("RECEIVED: ")
     message_json = json.loads(message)
     print(json.dumps(message_json, sort_keys=True, indent=2, separators=(',', ':')))
 
     for singleMsg in message_json:
-        process_message(ws, singleMsg)
+        process_message(singleMsg)
 
 
-def on_error(ws, error):
+def on_error(__file__, error):
     """ Called when websocket error has occurred """
     print(error)
 
 
-def on_close(ws):
+def on_close(_):
     """ Called when websocket is closed """
     global web_socket_open
     print("WebSocket Closed")
     web_socket_open = False
 
 
-def on_open(ws):
+def on_open(_):
     """ Called when handshake is complete and websocket is open, send login """
 
     print("WebSocket successfully connected!")
     global web_socket_open
     web_socket_open = True
-    send_login_request(ws)
+    send_login_request(is_refresh_token=False)
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
 
@@ -205,13 +215,30 @@ if __name__ == '__main__':
             on_close=on_close,
             subprotocols=[ws_protocol])
         web_socket_app.on_open = on_open
+        # for test
 
+        # expire_time_in_seconds = 120
+        # time_before_expire_in_seconds = 15
         # Event loop
         wst = threading.Thread(target=web_socket_app.run_forever)
         wst.start()
 
         try:
             while True:
-                time.sleep(1)
+                #time.sleep(1)
+                if (expire_time_in_seconds > time_before_expire_in_seconds):
+                    time.sleep(expire_time_in_seconds-time_before_expire_in_seconds)
+                else:
+                    # failt the refresh sine value too small
+                    sys.exit(1)
+                token, expiration, expire_time_in_seconds = CreateAuthorization(username,password,appid)
+                print('new Token = %s'%(token))
+                print('new Expiration  = %s'%(expiration))
+                print('new Expiration in next = %d seconds'%(expire_time_in_seconds))
+                if not token:
+                    sys.exit(1)
+                if logged_in:
+                    print('############### Re-new Authentication to TRKD ###############')
+                    send_login_request(is_refresh_token=True)
         except KeyboardInterrupt:
             web_socket_app.close()
