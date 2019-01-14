@@ -14,9 +14,10 @@ This is an example project that shows how to implement TRKD HTTP JSON client and
 - trkd_onlinereport.py: An example application that shows how to subscribe the Online Report data from TRKD service
 - trkd_chart.py: An example application that shows how to subscribe and download the Chart image data from TRKD service
 - trkd_wsstreaming.py: An example application that show how to subscribe the Quote data from TRKD Streming service via a WebSocket connection
-- requestments.txt: A requirement file contains a list of required libraries. 
+- requestments.txt: A requirement file contains a list of required libraries for HTTP JSON and WebSocket connections. 
 - docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications
 
+All source code and scripts are provided under the Apache 2.0 license. Thye are provided AS IS with no warranty or guarantee of fit for purpose. See the project's LICENSE.md for details. 
 
 ## Prerequisite
 The following softwares are required to use this script
@@ -46,7 +47,13 @@ The best way is via the pip package management tool
 	$>pip install -r requestments.txt
 	```
 
-*Note*: If you aim to use only TRKD HTTP JSON services, you can just install requests library via ```pip install requests``` command.
+*Note*: If you aim to use only TRKD HTTP JSON services, you can just install requests library via a ```pip install requests``` command.
+
+## References
+For further details, please check out the following resources:
+* [Thomson Reuters Knowledge Direct API page](https://developers.thomsonreuters.com/thomson-reuters-knowledge-direct-trkd) on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com/) web site.
+* [Thomson Reuters Knowledge Direct API Catalog](https://www.trkd.thomsonreuters.com/SupportSite/RequestBuilder/requestbuilder.aspx) web site.
+* [Elektron WebSocket API](https://developers.thomsonreuters.com/websocket-api) page on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com/) web site.
 
 ## Release Note
 - Version 1: 6 Sep 2016
@@ -85,3 +92,4 @@ The best way is via the pip package management tool
 	- remove all ```is not None``` statements and make them a bit more **Pythonic**.
 - version 1.0.11: January 2019
 	- Add trkd_wsstreaming.py application for TRKD Streaming service.
+	- Add License.md file

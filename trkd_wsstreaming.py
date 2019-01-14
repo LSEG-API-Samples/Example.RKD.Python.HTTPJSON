@@ -41,8 +41,8 @@ logged_in = False
 
 ric_name = 'EUR='
 
-expire_time_in_seconds = None
-time_before_expire_in_seconds = 15 * 60 # 15 Minutes to Seconds
+expire_time = 0
+time_to_relogin = 15 * 60 # 15 Minutes to Seconds
 
 ## ------------------------------------------ TRKD HTTP REST functions ------------------------------------------ ##
 
@@ -85,15 +85,16 @@ def CreateAuthorization(username, password, appid):
 
         ## Calcuate Expiration time
         expire_datetime_utc = dateutil.parser.parse(expiration) ## Parse incoming Expiration to Python datetime object (UTC)
-        utc_time_now = datetime.now(timezone.utc) ## Get current machine datetime in UTC 
+        now_datetime_utc = datetime.now(timezone.utc) ## Get current machine datetime object in UTC 
 
-        time_difference = expire_datetime_utc - utc_time_now ## Get time different between now and expiration time value 
-        time_difference_in_seconds = int(round(time_difference / timedelta(seconds=1))) ## convert it to second as a round int
+        expire_time = expire_datetime_utc - now_datetime_utc ## Get time different between now and expiration time value 
+        expire_time = int(round(expire_time / timedelta(seconds=1))) ## convert it to second as a round int
 
-    return token, expiration, time_difference_in_seconds
+    return token, expiration, expire_time
 
 ## ------------------------------------------ TRKD WebSocket functions ------------------------------------------ ##
 
+# Process incoming messages from TRKD Elektron WebSocket Server
 def process_message(message_json):
     """ Parse at high level and output JSON of message """
     message_type = message_json['Type']
@@ -103,13 +104,14 @@ def process_message(message_json):
             message_domain = message_json['Domain']
             if message_domain == "Login":
                 process_login_response(message_json)
-    elif message_type == "Ping":
-        pong_json = { 'Type':'Pong' }
+    # Ping and Pong messages are exchanged between endpoints of a connection to verify that the remote endpoint is still alive.
+    elif message_type == "Ping": 
+        pong_json = { 'Type':'Pong' } # when either endpoint receives a Ping message, it should send a Pong message in response.
         web_socket_app.send(json.dumps(pong_json))
         print("SENT:")
         print(json.dumps(pong_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-
+# Process incoming Login Refresh message from TRKD Elektron WebSocket Server
 def process_login_response(message_json):
     """ Send item request """
     global logged_in
@@ -117,7 +119,7 @@ def process_login_response(message_json):
     logged_in = True
     send_market_price_request(ric_name)
 
-
+# Send JSON OMM Market Price Request message to TRKD Elektron WebSocket Server
 def send_market_price_request(ric_name):
     """ Create and send simple Market Price request """
     mp_req_json = {
@@ -130,7 +132,7 @@ def send_market_price_request(ric_name):
     print("SENT:")
     print(json.dumps(mp_req_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-
+# Send JSON OMM Login Request message to TRKD Elektron WebSocket Server to initiate the OMM connection
 def send_login_request(is_refresh_token=False):
     """ Generate a login request from command line data (or defaults) and send """
     login_json = {
@@ -160,7 +162,7 @@ def send_login_request(is_refresh_token=False):
     print("SENT:")
     print(json.dumps(login_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-
+# Receive every messages from TRKD Elektron WebSocket Server
 def on_message(_, message):
     """ Called when message received, parse message into JSON for processing """
     print("RECEIVED: ")
@@ -182,7 +184,7 @@ def on_close(_):
     print("WebSocket Closed")
     web_socket_open = False
 
-
+# Establish a WebSocket connection success
 def on_open(_):
     """ Called when handshake is complete and websocket is open, send login """
 
@@ -200,10 +202,10 @@ if __name__ == '__main__':
     password = getpass.getpass(prompt='Please input password: ')
     appid = input('Please input appid: ')
 
-    token, expiration, expire_time_in_seconds = CreateAuthorization(username,password,appid)
+    token, expiration, expire_time = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
     print('Expiration  = %s'%(expiration))
-    print('Expiration in next = %d seconds'%(expire_time_in_seconds))
+    print('Expiration in next = %d seconds'%(expire_time))
     ## if authentiacation success, continue subscribing Quote
     if token and expiration:
         print('Do WS here')
@@ -215,30 +217,26 @@ if __name__ == '__main__':
             on_close=on_close,
             subprotocols=[ws_protocol])
         web_socket_app.on_open = on_open
-        # for test
 
-        # expire_time_in_seconds = 120
-        # time_before_expire_in_seconds = 15
         # Event loop
         wst = threading.Thread(target=web_socket_app.run_forever)
         wst.start()
 
         try:
             while True:
-                #time.sleep(1)
-                if (expire_time_in_seconds > time_before_expire_in_seconds):
-                    time.sleep(expire_time_in_seconds-time_before_expire_in_seconds)
+                if (expire_time > time_to_relogin):
+                    time.sleep(expire_time - time_to_relogin) # Sleep Thread until 15 minutes before expiration
                 else:
                     # failt the refresh sine value too small
                     sys.exit(1)
-                token, expiration, expire_time_in_seconds = CreateAuthorization(username,password,appid)
-                print('new Token = %s'%(token))
-                print('new Expiration  = %s'%(expiration))
-                print('new Expiration in next = %d seconds'%(expire_time_in_seconds))
+                
+                # Re-issue login request before token expiration to keep session open. 
+                token, expiration, expire_time = CreateAuthorization(username,password,appid)
                 if not token:
                     sys.exit(1)
                 if logged_in:
                     print('############### Re-new Authentication to TRKD ###############')
-                    send_login_request(is_refresh_token=True)
+                    # Resend JSON OMM Login Request message with Refresh: false to TRKD Elektron WebSocket Server
+                    send_login_request(is_refresh_token=True) 
         except KeyboardInterrupt:
             web_socket_app.close()
