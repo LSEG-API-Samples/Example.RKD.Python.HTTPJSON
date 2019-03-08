@@ -97,5 +97,5 @@ if __name__ == '__main__':
     token = CreateAuthorization(username, password, appid)
     print('Token = %s'%(token))
     ## if authentiacation success, continue subscribing Time Series interday
-    if token is not None:
+    if token:
         RetrieveInteraday(token, appid)
