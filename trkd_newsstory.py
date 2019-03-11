@@ -14,6 +14,8 @@ import json
 import getpass
 
 # Send HTTP request for all services
+
+
 def doSendRequest(url, requestMsg, headers):
     result = None
     try:
@@ -26,7 +28,9 @@ def doSendRequest(url, requestMsg, headers):
             print('Request fail')
             print('response status %s' % (result.status_code))
             if result.status_code == 500:  # if username or password or appid is wrong
-                print('Error: %s' % (result.json()))
+                #print('Error: %s' % (result.json()))
+                print('Error: %s' % (json.dumps(result.json(),
+                                                sort_keys=True, indent=2, separators=(',', ':'))))
             result.raise_for_status()
     except requests.exceptions.RequestException as e:
         print('Exception!!!')
@@ -54,6 +58,8 @@ def CreateAuthorization(username, password, appid):
     return token
 
 # Perform News Story request
+
+
 def RetrieveNewsStory(token, appid):
     # construct news story URL and header
     newsURL = 'http://api.trkd.thomsonreuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
@@ -71,12 +77,12 @@ def RetrieveNewsStory(token, appid):
     newsResult = doSendRequest(newsURL, newsRequestMsg, headers)
     if newsResult and newsResult.status_code == 200:
         print('News Story response message: ')
-        print(newsResult.json())
-
+        # print(newsResult.json())
+        print(json.dumps(newsResult.json(), sort_keys=True,
+                         indent=2, separators=(',', ':')))
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
-
 if __name__ == '__main__':
     # Get username, password and applicationid
     username = input('Please input username: ')

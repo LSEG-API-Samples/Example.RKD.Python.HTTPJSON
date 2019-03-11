@@ -26,7 +26,8 @@ def doSendRequest(url, requestMsg, headers):
             print('Request fail')
             print('response status %s'%(result.status_code))
             if result.status_code == 500: ## if username or password or appid is wrong
-                print('Error: %s'%(result.json()))
+                #print('Error: %s'%(result.json()))
+                print('Error: %s' % (json.dumps(result.json(),sort_keys=True, indent=2, separators=(',', ':'))))
             result.raise_for_status()
     except requests.exceptions.RequestException as e:
         print('Exception!!!')
@@ -83,7 +84,9 @@ def RetrieveInteraday(token, appid):
     interdayResult = doSendRequest(interdayURL, interdayRequestMsg, headers)
     if interdayResult and interdayResult.status_code == 200:
         print('Time Series Interday response message: ')
-        print(interdayResult.json())
+        #print(interdayResult.json())
+        print(json.dumps(interdayResult.json(), sort_keys=True, indent=2, separators=(',', ':')))
+        
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##

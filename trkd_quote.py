@@ -26,7 +26,8 @@ def doSendRequest(url, requestMsg, headers):
             print('Request fail')
             print('response status %s'%(result.status_code))
             if result.status_code == 500: ## if username or password or appid is wrong
-                print('Error: %s'%(result.json()))
+                #print('Error: %s'%(result.json()))
+                print('Error: %s' % (json.dumps(result.json(),sort_keys=True, indent=2, separators=(',', ':'))))
             result.raise_for_status()
         #if result.status_code == 500:
             #print('Request fail')
@@ -89,7 +90,8 @@ def RetrieveQuotes(token, appid):
     quoteResult = doSendRequest(quoteURL, quoteRequestMsg,headers)
     if quoteResult and quoteResult.status_code == 200:
         print('Quote response message: ')
-        print(quoteResult.json())
+        #print(quoteResult.json())
+        print(json.dumps(quoteResult.json(), sort_keys=True,indent=2, separators=(',', ':')))
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
