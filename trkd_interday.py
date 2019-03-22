@@ -4,7 +4,7 @@ and without knowledge or assumptions of the end users development environment.
 We offer this code to provide developers practical and useful guidance while developing their own code. 
 However, we do not offer support and troubleshooting of issues that are related to the use of this code 
 in a particular environment; it is offered solely as sample code for guidance. 
-Please see the Thomson Reuters Knowledge Direct product page at http://customers.thomsonreuters.com 
+Please see the Thomson Reuters Knowledge Direct product page at https://my.refinitiv.com 
 for additional information regarding the TRKD API.'''
 
 
@@ -26,7 +26,8 @@ def doSendRequest(url, requestMsg, headers):
             print('Request fail')
             print('response status %s'%(result.status_code))
             if result.status_code == 500: ## if username or password or appid is wrong
-                print('Error: %s'%(result.json()))
+                #print('Error: %s'%(result.json()))
+                print('Error: %s' % (json.dumps(result.json(),sort_keys=True, indent=2, separators=(',', ':'))))
             result.raise_for_status()
     except requests.exceptions.RequestException as e:
         print('Exception!!!')
@@ -65,12 +66,11 @@ def RetrieveInteraday(token, appid):
     interdayRequestMsg = {
         'GetInterdayTimeSeries_Request_4':{
             'Field': fields,
-            'TrimResponse': True,
+            'TrimResponse': False,
             'Symbol': ricName,
             'StartTime':startTime,
             'EndTime':endtime,  
             'Interval':interval,
-            'TrimResponse': True,
             'MetaField': ['NAME','QOS','CCY','TZ','TZOFFSET','NAME_LL']
         }
     }
@@ -83,7 +83,9 @@ def RetrieveInteraday(token, appid):
     interdayResult = doSendRequest(interdayURL, interdayRequestMsg, headers)
     if interdayResult and interdayResult.status_code == 200:
         print('Time Series Interday response message: ')
-        print(interdayResult.json())
+        #print(interdayResult.json())
+        print(json.dumps(interdayResult.json(), sort_keys=True, indent=2, separators=(',', ':')))
+        
 
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
@@ -97,5 +99,5 @@ if __name__ == '__main__':
     token = CreateAuthorization(username, password, appid)
     print('Token = %s'%(token))
     ## if authentiacation success, continue subscribing Time Series interday
-    if token is not None:
+    if token:
         RetrieveInteraday(token, appid)
