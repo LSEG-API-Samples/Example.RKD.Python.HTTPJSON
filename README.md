@@ -2,7 +2,7 @@
 ## Overview
 The [Thomson Reuters Knowledge Direct (TRKD) API](https://developers.thomsonreuters.com/thomson-reuters-knowledge-direct-trkd) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
 
-TRKD offers a wide range of Thomson Reuters' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
+TRKD offers a wide range of Refinitiv' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
 This is an example project that shows how to implement TRKD HTTP JSON client and TRKD Streaming client with Python programming lanugage. This project contains the following example scripts for each TRKD services
 - trkd_authen.py: An example application that shows how to authenticate with TRKD service
@@ -93,3 +93,5 @@ For further details, please check out the following resources:
 - version 1.0.11: January 2019
 	- Add trkd_wsstreaming.py application for TRKD Streaming service.
 	- Add License.md file
+- version 1.0.12: March 2019
+	- Change all scripts to print JSON message in beauty format.
