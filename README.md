@@ -4,7 +4,12 @@ The [Thomson Reuters Knowledge Direct (TRKD) API](https://developers.thomsonreut
 
 TRKD offers a wide range of Refinitiv' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
-This is an example project that shows how to implement TRKD HTTP JSON client and TRKD Streaming client with Python programming lanugage. This project contains the following example scripts for each TRKD services
+This is an example project that shows how to implement TRKD HTTP JSON client and TRKD Streaming client with Python programming lanugage. The project example are in both console and Jupyter Notebook applications.
+
+*Note:* The Jupyter Notebook example does not contain all the same TRKD services service as console example yet. [TBD]
+
+## Application Files
+This project contains the following example scripts for each TRKD services
 - trkd_authen.py: An example application that shows how to authenticate with TRKD service
 - trkd_quote.py: An example application that shows how to subscribe (all fields and specific fields) the Quote data from TRKD service
 - trkd_newsheadline.py: An example application that shows how to subscribe the News Headline data from TRKD service
@@ -14,6 +19,8 @@ This is an example project that shows how to implement TRKD HTTP JSON client and
 - trkd_onlinereport.py: An example application that shows how to subscribe the Online Report data from TRKD service
 - trkd_chart.py: An example application that shows how to subscribe and download the Chart image data from TRKD service
 - trkd_wsstreaming.py: An example application that show how to subscribe the Quote data from TRKD Streming service via a WebSocket connection
+- notebook folder:
+	- *notebook/trkd_authentication.ipynb*: A Jupyter Notebook TRKD Authentication service example
 - requestments.txt: A requirement file contains a list of required libraries for HTTP JSON and WebSocket connections. 
 - docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications
 
@@ -21,12 +28,17 @@ All source code and scripts are provided under the Apache 2.0 license. Thye are 
 
 ## Prerequisite
 The following softwares are required to use this script
+- TRKD API credentials. Please reach out to your Refinitiv sales associate to acquire TRKD access credentials.
 - Python 3 
 - The [requests](http://docs.python-requests.org/en/master/) library
 - The [websocket-client](https://pypi.org/project/websocket-client/) library (*version 0.49 or greater*, for trkd_wsstreaming.py application only)
 - The [python-dateutil](https://pypi.org/project/python-dateutil/) library (for trkd_wsstreaming.py application only)
+- [Jupyter Notebook](https://jupyter.org/) runtime (for the Notebook example application)
 
 All scripts support Python 3 and not compatible with Python 2.
+
+*Note:* 
+- You can install Jupyter Notebook on your local machine and then test the example on the machine. The alternate choice is a free Jupyter Notebook on cloud environment such as [Azure Notebook](https://notebooks.azure.com/) provided by Microsoft. You can find more details from [this tutorial](https://docs.microsoft.com/en-us/azure/notebooks/tutorial-create-run-jupyter-notebook). If you are not familiar with Jupyter Notebook, the following [tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) created by DataCamp may help.
 
 ## How to run the script
 Run the script via the command line (or shell)
@@ -95,3 +107,5 @@ For further details, please check out the following resources:
 	- Add License.md file
 - version 1.0.12: March 2019
 	- Change all scripts to print JSON message in beauty format.
+- version 1.5: July 2019
+	- Add TRKD Authentication Jupyter Notebook.
