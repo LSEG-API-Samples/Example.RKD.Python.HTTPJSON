@@ -6,7 +6,7 @@ TRKD offers a wide range of Refinitiv' information and services delivered in a r
 
 This is an example project that shows how to implement TRKD HTTP JSON client and TRKD Streaming client with Python programming lanugage. The project example are in both console and Jupyter Notebook applications.
 
-*Note:* The Jupyter Notebook example does not contain all the same TRKD services service as console example yet. [TBD]
+*Note:* The Jupyter Notebook example does not contain all the same TRKD services service as console examples yet. [TBD]
 
 ## Application Files
 This project contains the following example scripts for each TRKD services
@@ -21,6 +21,8 @@ This project contains the following example scripts for each TRKD services
 - trkd_wsstreaming.py: An example application that show how to subscribe the Quote data from TRKD Streming service via a WebSocket connection
 - notebook folder:
 	- *notebook/trkd_authentication.ipynb*: A Jupyter Notebook TRKD Authentication service example
+	- *notebook/trkd_timeseries_interday.ipynb*: A Jupyter Notebook TRKD Time-Series Interday service example
+	- *notebook/trkd_timeseries_intraday.ipynb*: A Jupyter Notebook TRKD Time-Series Intraday service example
 - requestments.txt: A requirement file contains a list of required libraries for HTTP JSON and WebSocket connections. 
 - docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications
 
@@ -33,7 +35,7 @@ The following softwares are required to use this script
 - The [requests](http://docs.python-requests.org/en/master/) library
 - The [websocket-client](https://pypi.org/project/websocket-client/) library (*version 0.49 or greater*, for trkd_wsstreaming.py application only)
 - The [python-dateutil](https://pypi.org/project/python-dateutil/) library (for trkd_wsstreaming.py application only)
-- [Jupyter Notebook](https://jupyter.org/) runtime (for the Notebook example application)
+- The [classic Jupyter Notebook](https://jupyter.org/) runtime (for the Notebook example application)
 
 All scripts support Python 3 and not compatible with Python 2.
 
@@ -46,7 +48,7 @@ Run the script via the command line (or shell)
 $>python <application>.py
 ```
 
-## Optional - How to install requests
+## Optional - How to install libraries for console examples
 The best way is via the pip package management tool
 1. export <Python_folder>\Scripts to your OS PATH environment
 2. call pip command to install requests
@@ -60,6 +62,9 @@ The best way is via the pip package management tool
 	```
 
 *Note*: If you aim to use only TRKD HTTP JSON services, you can just install requests library via a ```pip install requests``` command.
+
+## Optional - How to install libraries for notebook examples
+Please follow the [classic Jupyter Notebook installation guide](https://jupyter.org/install) page.
 
 ## References
 For further details, please check out the following resources:
@@ -109,3 +114,5 @@ For further details, please check out the following resources:
 	- Change all scripts to print JSON message in beauty format.
 - version 1.5: July 2019
 	- Add TRKD Authentication Jupyter Notebook.
+- version 1.5.1: July 2019
+	- Add TRKD Interday and Intraday Jupyter Notebooks.

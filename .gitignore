@@ -10,3 +10,5 @@ interday_result2.txt
 interday_result3.txt
 interday_result4.txt
 notebook/test/
+notebook/.ipynb_checkpoints
+*/.ipynb_checkpoints/*
