@@ -1,10 +1,10 @@
 '''
-The TRKD API sample code is provided for informational purposes only 
-and without knowledge or assumptions of the end users development environment. 
-We offer this code to provide developers practical and useful guidance while developing their own code. 
-However, we do not offer support and troubleshooting of issues that are related to the use of this code 
-in a particular environment; it is offered solely as sample code for guidance. 
-Please see the Thomson Reuters Knowledge Direct product page at https://my.refinitiv.com 
+The TRKD API sample code is provided for informational purposes only
+and without knowledge or assumptions of the end users development environment.
+We offer this code to provide developers practical and useful guidance while developing their own code.
+However, we do not offer support and troubleshooting of issues that are related to the use of this code
+in a particular environment; it is offered solely as sample code for guidance.
+Please see the Thomson Reuters Knowledge Direct product page at https://my.refinitiv.com
 for additional information regarding the TRKD API.'''
 
 
@@ -29,7 +29,7 @@ def doSendRequest(url, requestMsg, headers):
             print('Request fail')
             print('response status %s' % (result.status_code))
             if result.status_code == 500:  # if username or password or appid is wrong
-                #print('Error: %s' % (result.json()))
+                # print('Error: %s' % (result.json()))
                 print('Error: %s' % (json.dumps(result.json(),
                                                 sort_keys=True, indent=2, separators=(',', ':'))))
             result.raise_for_status()
@@ -68,13 +68,13 @@ def RetrieveIntraday(token, appid):
     # change your fields (support these 'OPEN','HIGH','LOW','CLOSE','CLOSEYIELD','VOLUME','BID','ASK' fields only)
     fields = ['OPEN', 'HIGH', 'LOW', 'CLOSE',
               'CLOSEYIELD', 'VOLUME', 'BID', 'ASK']
-    startTime = '2016-09-12T00:00:00'  # change your StartTime
-    endtime = '2016-09-19T23:59:00'  # change your EndTime
+    startTime = '2019-09-12T00:00:00'  # change your StartTime
+    endtime = '2019-09-19T23:59:00'  # change your EndTime
     # interval = 'MINUTE' # change your interval between 'MINUTE', '5MINUTES', '30MINUTES' and 'HOUR'
     interval = input(
         'Input interested interval (\'MINUTE\' or \'5MINUTES\' or \'30MINUTES\' or \'HOUR\'): ')
     intradayRequestMsg = {
-        'GetIntradayTimeSeries_Request_4': {
+        'GetIntradayTimeSeries_Request_5': {
             'Field': fields,
             'TrimResponse': False,
             'Symbol': ricName,
@@ -85,7 +85,7 @@ def RetrieveIntraday(token, appid):
         }
     }
     # construct Time Series Intraday URL and header
-    intradayURL = 'http://api.trkd.thomsonreuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetIntradayTimeSeries_4'
+    intradayURL = 'http://api.trkd.thomsonreuters.com/api/TimeSeries/TimeSeries.svc/REST/TimeSeries_1/GetIntradayTimeSeries_5'
     headers = {'content-type': 'application/json;charset=utf-8',
                'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
 

@@ -68,9 +68,9 @@ Please follow the [classic Jupyter Notebook installation guide](https://jupyter.
 
 ## References
 For further details, please check out the following resources:
-* [Thomson Reuters Knowledge Direct API page](https://developers.thomsonreuters.com/thomson-reuters-knowledge-direct-trkd) on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com/) web site.
+* [Thomson Reuters Knowledge Direct API page](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) on the [Thomson Reuters Developer Community](https://developers.refinitiv.com/) web site.
 * [Thomson Reuters Knowledge Direct API Catalog](https://www.trkd.thomsonreuters.com/SupportSite/RequestBuilder/requestbuilder.aspx) web site.
-* [Elektron WebSocket API](https://developers.thomsonreuters.com/websocket-api) page on the [Thomson Reuters Developer Community](https://developers.thomsonreuters.com/) web site.
+* [Elektron WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Thomson Reuters Developer Community](https://developers.refinitiv.com/) web site.
 
 ## Release Note
 - Version 1: 6 Sep 2016
@@ -116,3 +116,5 @@ For further details, please check out the following resources:
 	- Add TRKD Authentication Jupyter Notebook.
 - version 1.5.1: July 2019
 	- Add TRKD Interday and Intraday Jupyter Notebooks.
+- version 1.5.2: October 2019
+	- Update TRKD Interday and Intraday services operations.
