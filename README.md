@@ -1,6 +1,6 @@
 # TRKD HTTP JSON with Python Example
 ## Overview
-The [Thomson Reuters Knowledge Direct (TRKD) API](https://developers.thomsonreuters.com/thomson-reuters-knowledge-direct-trkd) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
+The [Refnitiv Knowledge Direct (TRKD) API](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
 
 TRKD offers a wide range of Refinitiv' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
@@ -68,7 +68,7 @@ Please follow the [classic Jupyter Notebook installation guide](https://jupyter.
 
 ## RDP and ERT in Cloud
 
-You may consider the strategic [Refinitiv Data Platform (RDP)](https://developers.refinitiv.com/refinitiv-data-platform) web base APIs platform. RDP APIs give you seamless and holistic access to all of Refinitiv content (whether real-time or non- real-time, analytics or alternative datasets) such as Historical Pricing, Environmental Social and Governance (ESG), News, Research, etc and commingled with your own content, enriching, integrating and distributing the data through a single interface, delivered wherever you need it via the following delivery mechanisms:
+You may consider the strategic [Refinitiv Data Platform (RDP)](https://developers.refinitiv.com/refinitiv-data-platform) web base APIs platform. RDP APIs give you seamless and holistic access to all of Refinitiv content such as Historical Pricing, Environmental Social and Governance (ESG), News, Research, etc and commingled with your own content, enriching, integrating and distributing the data through a single interface, delivered wherever you need it.  The RDP APIs delivery mechanisms are following:
 * Request - Response: RESTful web service (HTTP GET, POST, PUT or DELETE) 
 * Alert: delivery is a mechanism to receive asynchronous updates (alerts) to a subscription. 
 * Bulks:  deliver substantial payloads, like the end of day pricing data for the whole venue. 
