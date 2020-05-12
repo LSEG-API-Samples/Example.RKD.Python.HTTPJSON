@@ -1,6 +1,6 @@
 # TRKD HTTP JSON with Python Example
 ## Overview
-The [Thomson Reuters Knowledge Direct (TRKD) API](https://developers.thomsonreuters.com/thomson-reuters-knowledge-direct-trkd) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
+The [Refnitiv Knowledge Direct (TRKD) API](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
 
 TRKD offers a wide range of Refinitiv' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
@@ -66,11 +66,30 @@ The best way is via the pip package management tool
 ## Optional - How to install libraries for notebook examples
 Please follow the [classic Jupyter Notebook installation guide](https://jupyter.org/install) page.
 
+## RDP and ERT in Cloud
+
+You may consider the strategic [Refinitiv Data Platform (RDP)](https://developers.refinitiv.com/refinitiv-data-platform) web base APIs platform. RDP APIs give you seamless and holistic access to all of Refinitiv content such as Historical Pricing, Environmental Social and Governance (ESG), News, Research, etc and commingled with your own content, enriching, integrating and distributing the data through a single interface, delivered wherever you need it.  The RDP APIs delivery mechanisms are following:
+* Request - Response: RESTful web service (HTTP GET, POST, PUT or DELETE) 
+* Alert: delivery is a mechanism to receive asynchronous updates (alerts) to a subscription. 
+* Bulks:  deliver substantial payloads, like the end of day pricing data for the whole venue. 
+* Streaming: deliver real-time delivery of messages.
+
+Please see [RDP API Overview page](https://developers.refinitiv.com/refinitiv-data-platform/refinitiv-data-platform-apis) for more detail.
+
+As part of RDP, [Elektron Real Time in Cloud (ERT in Cloud)](https://developers.thomsonreuters.com/elektron/websocket-api/quick-start?content=45253&type=quick_start) gives you access to best in class Real Time market data delivered in the cloud.  ERT in Cloud is a new delivery mechanism for RDP, using the AWS (Amazon Web Services) cloud. Once a connection to RDP is established using ERT in Cloud, data can be retrieved using [Elektron WebSocket API](https://developers.thomsonreuters.com/websocket-api) (the same as TRKD Streaming Service).
+
+Key benefit of the strategic RDP and ERT in Cloud platform are the Cloud Delivery. The Platform is based on [Amazon AWS](https://aws.amazon.com/), the world class leading Cloud Provider for developers. The RDP and ERT in Cloud support output for multiple cloud vendors such as AWS, Azure, GCS, etc. for cloud-native or on-premise integration. The ERT in Cloud servers are hosted in multiple location world-wide which lets the application choose the closest server based on their region for full potential. 
+
+Please refer to [Elektron WebSocket API Quick Start - Connecting to Elektron Real Time in Cloud](https://developers.refinitiv.com/elektron/websocket-api/quick-start?content=45253&type=quick_start) page and [How to migrate the WebSocket application from TRKD Streaming service to Elektron Real Time in Cloud](https://developers.refinitiv.com/article/how-migrate-websocket-application-trkd-streaming-service-elektron-real-time-cloud) article for more detail.
+
+
 ## References
 For further details, please check out the following resources:
-* [Thomson Reuters Knowledge Direct API page](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) on the [Thomson Reuters Developer Community](https://developers.refinitiv.com/) web site.
-* [Thomson Reuters Knowledge Direct API Catalog](https://www.trkd.thomsonreuters.com/SupportSite/RequestBuilder/requestbuilder.aspx) web site.
-* [Elektron WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Thomson Reuters Developer Community](https://developers.refinitiv.com/) web site.
+* [Refinitiv Knowledge Direct API page](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
+* [Refinitiv Knowledge Direct API Catalog](https://www.trkd.thomsonreuters.com/SupportSite/RequestBuilder/requestbuilder.aspx) web site.
+* [Elektron WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
+* [Refinitiv Data Platform (RDP) APIs page](https://developers.refinitiv.com/refinitiv-data-platform).
+* [Refinitiv Data Platform (RDP) APIs Gateway page](https://api.refinitiv.com).
 
 ## Release Note
 - Version 1: 6 Sep 2016
@@ -118,3 +137,5 @@ For further details, please check out the following resources:
 	- Add TRKD Interday and Intraday Jupyter Notebooks.
 - version 1.5.2: October 2019
 	- Update TRKD Interday and Intraday services operations.
+- version 1.5.3: May 2020
+	- Update RDP and ERT in Cloud information.

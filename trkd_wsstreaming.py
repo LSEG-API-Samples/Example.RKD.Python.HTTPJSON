@@ -7,6 +7,16 @@ in a particular environment; it is offered solely as sample code for guidance.
 Please see the Thomson Reuters Knowledge Direct product page at https://my.refinitiv.com 
 for additional information regarding the TRKD API.'''
 
+'''
+If you are interested TRKD Streaming Service API, please consider the Elektron Real Time in Cloud (ERT in Cloud) which is a strategic Real Time market data delivered in the cloud. 
+
+Key benefit of ERT in Cloud platform is the Cloud Delivery. The Platform is based on Amazon AWS, the world class leading Cloud Provider for developers. 
+ERT in Cloud support output for multiple cloud vendors such as AWS, Azure, GCS, etc. for cloud-native or on-premise integration. 
+The ERT in Cloud servers are hosted in multiple location world-wide which lets the application choose the closest server based on their region for full potential. 
+
+Please see more detail in https://github.com/Refinitiv-API-Samples/Example.ERT.TRKD.Python.WebSocket_Migration project.
+'''
+
 import os
 import sys
 import requests
