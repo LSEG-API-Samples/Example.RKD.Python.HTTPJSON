@@ -13,3 +13,5 @@ notebook/test/
 notebook/.ipynb_checkpoints
 */.ipynb_checkpoints/*
 trkd_websocketexample.py
+ERT_in_Cloud/
+docs_tr/
