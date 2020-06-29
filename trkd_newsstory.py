@@ -1,11 +1,11 @@
 '''
-The TRKD API sample code is provided for informational purposes only 
+The RKD API sample code is provided for informational purposes only 
 and without knowledge or assumptions of the end users development environment. 
 We offer this code to provide developers practical and useful guidance while developing their own code. 
 However, we do not offer support and troubleshooting of issues that are related to the use of this code 
 in a particular environment; it is offered solely as sample code for guidance. 
-Please see the Thomson Reuters Knowledge Direct product page at https://my.refinitiv.com 
-for additional information regarding the TRKD API.'''
+Please see the Refinitiv Knowledge Direct (RKD) API (formerly known as TRKD API) product page at https://my.refinitiv.com 
+for additional information regarding the RKD API.'''
 
 import os
 import sys
@@ -45,9 +45,9 @@ def CreateAuthorization(username, password, appid):
     # create authentication request URL, message and header
     authenMsg = {'CreateServiceToken_Request_1': {
         'ApplicationID': appid, 'Username': username, 'Password': password}}
-    authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
+    authenURL = 'https://api.rkd.refinitiv.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
-    print('############### Sending Authentication request message to TRKD ###############')
+    print('############### Sending Authentication request message to RKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
     if authenResult and authenResult.status_code == 200:
         print('Authen success')
@@ -62,7 +62,7 @@ def CreateAuthorization(username, password, appid):
 
 def RetrieveNewsStory(token, appid):
     # construct news story URL and header
-    newsURL = 'http://api.trkd.thomsonreuters.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
+    newsURL = 'http://api.rkd.refinitiv.com/api/News/News.svc/REST/News_1/RetrieveStoryML_1'
     headers = {'content-type': 'application/json;charset=utf-8',
                'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
     # construct a news story request message
@@ -73,7 +73,7 @@ def RetrieveNewsStory(token, appid):
         }
     }}
 
-    print('############### Sending News Story request message to TRKD ###############')
+    print('############### Sending News Story request message to RKD ###############')
     newsResult = doSendRequest(newsURL, newsRequestMsg, headers)
     if newsResult and newsResult.status_code == 200:
         print('News Story response message: ')
@@ -84,15 +84,15 @@ def RetrieveNewsStory(token, appid):
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
 if __name__ == '__main__':
-    # Get username, password and applicationid
+    ## Get username, password and applicationid
     username = input('Please input username: ')
-    # use getpass.getpass to hide user inputted password
+    ## Use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')
+    appid = input('Please input appid: ') 
 
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))
 
-    # if authentiacation success, continue subscribing News Story
+    # if authentication success, continue subscribing News Story
     if token:
         RetrieveNewsStory(token, appid)
