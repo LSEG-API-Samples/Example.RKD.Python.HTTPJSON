@@ -42,7 +42,7 @@ def CreateAuthorization(username, password, appid):
     token = None
     ##create authentication request URL, message and header
     authenMsg = {'CreateServiceToken_Request_1': { 'ApplicationID':appid, 'Username':username,'Password':password }}
-    authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
+    authenURL = 'https://api.rkd.refinitiv.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
     print('############### Sending Authentication request message to TRKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
@@ -275,7 +275,7 @@ def RetrieveChart(token, appid):
     'ReturnPrivateNetworkURL': False,
     }}}
     ##construct Chart URL and header
-    chartURL = 'http://api.trkd.thomsonreuters.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2'
+    chartURL = 'http://api.rkd.refinitiv.com/api/Charts/Charts.svc/REST/Charts_1/GetChart_2'
     headers = {'content-type': 'application/json;charset=utf-8' ,'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token' : token}
     
     print('############### Sending Chart request message to TRKD ###############')
@@ -312,15 +312,15 @@ def downloadChartImage(chartURL):
 ## ------------------------------------------ Main App ------------------------------------------ ##
 
 if __name__ == '__main__':
-    ##Get username, password and applicationid
+    ## Get username, password and applicationid
     username = input('Please input username: ')
-    ##use getpass.getpass to hide user inputted password
+    ## Use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')   
+    appid = input('Please input appid: ')    
 
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
-    ## if authentiacation success, continue subscribing Chart
+    ## if authentication success, continue subscribing Chart
     if token:
         chartURL = RetrieveChart(token,appid)
         ## if chart request success, continue downloading Chart image

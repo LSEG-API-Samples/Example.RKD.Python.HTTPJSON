@@ -25,8 +25,8 @@ import dateutil.parser
 
 
 # Global Default Variables
-ws_address = 'wss://streaming.trkd.thomsonreuters.com/WebSocket/'
-trkd_authen_address = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
+ws_address = 'wss://streaming.rkd.refinitiv.com/WebSocket/'
+trkd_authen_address = 'https://api.rkd.refinitiv.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
 ws_protocol = 'tr_json2'
 position = socket.gethostbyname(socket.gethostname())
 
@@ -45,7 +45,7 @@ ric_name = 'EUR='
 expire_time = 0
 time_to_relogin = 15 * 60 # 15 Minutes to Seconds
 
-## ------------------------------------------ TRKD HTTP REST functions ------------------------------------------ ##
+## ------------------------------------------ RKD HTTP REST functions ------------------------------------------ ##
 
 # Send HTTP request for all services
 def doSendRequest(url, requestMsg, headers):
@@ -94,9 +94,9 @@ def CreateAuthorization(username, password, appid):
 
     return token, expiration, expire_time
 
-## ------------------------------------------ TRKD WebSocket functions ------------------------------------------ ##
+## ------------------------------------------ RKD WebSocket functions ------------------------------------------ ##
 
-# Process incoming messages from TRKD Elektron WebSocket Server
+# Process incoming messages from RKD Elektron WebSocket Server
 def process_message(message_json):
     """ Parse at high level and output JSON of message """
     message_type = message_json['Type']
@@ -113,7 +113,7 @@ def process_message(message_json):
         print("SENT:")
         print(json.dumps(pong_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-# Process incoming Login Refresh message from TRKD Elektron WebSocket Server
+# Process incoming Login Refresh message from RKD Elektron WebSocket Server
 def process_login_response(message_json):
     """ Send item request """
     global logged_in
@@ -121,7 +121,7 @@ def process_login_response(message_json):
     logged_in = True
     send_market_price_request(ric_name)
 
-# Send JSON OMM Market Price Request message to TRKD Elektron WebSocket Server
+# Send JSON OMM Market Price Request message to RKD Elektron WebSocket Server
 def send_market_price_request(ric_name):
     """ Create and send simple Market Price request """
     mp_req_json = {
@@ -134,7 +134,7 @@ def send_market_price_request(ric_name):
     print("SENT:")
     print(json.dumps(mp_req_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-# Send JSON OMM Login Request message to TRKD Elektron WebSocket Server to initiate the OMM connection
+# Send JSON OMM Login Request message to RKD Elektron WebSocket Server to initiate the OMM connection
 def send_login_request(is_refresh_token=False):
     """ Generate a login request from command line data (or defaults) and send """
     login_json = {
@@ -164,7 +164,7 @@ def send_login_request(is_refresh_token=False):
     print("SENT:")
     print(json.dumps(login_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-# Receive every messages from TRKD Elektron WebSocket Server
+# Receive every messages from RKD Elektron WebSocket Server
 def on_message(_, message):
     """ Called when message received, parse message into JSON for processing """
     print("RECEIVED: ")
@@ -200,15 +200,16 @@ def on_open(_):
 if __name__ == '__main__':
     ## Get username, password and applicationid
     username = input('Please input username: ')
-    ## use getpass.getpass to hide user inputted password
+    ## Use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')
+    appid = input('Please input appid: ')   
+
 
     token, expiration, expire_time = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))
     print('Expiration  = %s'%(expiration))
     print('Expiration in next = %d seconds'%(expire_time))
-    ## if authentiacation success, continue subscribing Quote
+    ## if authentication success, continue subscribing Quote
     if token and expiration:
         print('Do WS here')
         # doWebSocketConnection(username, appid, token)
@@ -237,8 +238,8 @@ if __name__ == '__main__':
                 if not token:
                     sys.exit(1)
                 if logged_in:
-                    print('############### Re-new Authentication to TRKD ###############')
-                    # Resend JSON OMM Login Request message with Refresh: false to TRKD Elektron WebSocket Server
+                    print('############### Re-new Authentication to RKD ###############')
+                    # Resend JSON OMM Login Request message with Refresh: false to RKD Elektron WebSocket Server
                     send_login_request(is_refresh_token=True) 
         except KeyboardInterrupt:
             web_socket_app.close()

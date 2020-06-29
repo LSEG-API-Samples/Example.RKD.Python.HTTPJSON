@@ -45,9 +45,9 @@ def CreateAuthorization(username, password, appid):
     # create authentication request URL, message and header
     authenMsg = {'CreateServiceToken_Request_1': {
         'ApplicationID': appid, 'Username': username, 'Password': password}}
-    authenURL = 'https://api.trkd.thomsonreuters.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
+    authenURL = 'https://api.rkd.refinitiv.com/api/TokenManagement/TokenManagement.svc/REST/Anonymous/TokenManagement_1/CreateServiceToken_1'
     headers = {'content-type': 'application/json;charset=utf-8'}
-    print('############### Sending Authentication request message to TRKD ###############')
+    print('############### Sending Authentication request message to RKD ###############')
     authenResult = doSendRequest(authenURL, authenMsg, headers)
     if authenResult and authenResult.status_code == 200:
         print('Authen success')
@@ -62,7 +62,7 @@ def CreateAuthorization(username, password, appid):
 
 def RetrieveOnlineReport(token, appid):
     # construct Online Report URL and header
-    onlinereportURL = 'http://api.trkd.thomsonreuters.com/api/OnlineReports/OnlineReports.svc/REST/OnlineReports_1/GetSummaryByTopic_1'
+    onlinereportURL = 'http://api.rkd.refinitiv.com/api/OnlineReports/OnlineReports.svc/REST/OnlineReports_1/GetSummaryByTopic_1'
     headers = {'content-type': 'application/json;charset=utf-8',
                'X-Trkd-Auth-ApplicationID': appid, 'X-Trkd-Auth-Token': token}
     # construct a Online Report request message
@@ -72,7 +72,7 @@ def RetrieveOnlineReport(token, appid):
         'ReturnPrivateNetworkURL': False
     }
     }
-    print('############### Sending News - Online Report request message to TRKD ###############')
+    print('############### Sending News - Online Report request message to RKD ###############')
     onlinereportResult = doSendRequest(
         onlinereportURL, onelinereportRequestMsg, headers)
     if onlinereportResult and onlinereportResult.status_code == 200:
@@ -84,15 +84,16 @@ def RetrieveOnlineReport(token, appid):
 
 ## ------------------------------------------ Main App ------------------------------------------ ##
 if __name__ == '__main__':
-    # Get username, password and applicationid
+    ## Get username, password and applicationid
     username = input('Please input username: ')
-    # use getpass.getpass to hide user inputted password
+    ## Use getpass.getpass to hide user inputted password
     password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')
+    appid = input('Please input appid: ')   
+
 
     token = CreateAuthorization(username, password, appid)
     print('Token = %s' % (token))
 
-    # if authentiacation success, continue subscribing Online Report
+    # if authentication success, continue subscribing Online Report
     if token:
         RetrieveOnlineReport(token, appid)
