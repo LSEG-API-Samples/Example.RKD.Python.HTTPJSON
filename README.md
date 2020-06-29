@@ -1,6 +1,6 @@
 # RKD HTTP JSON with Python Example
 ## Overview
-The [Refinitiv Knowledge Direct (RKD) API](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) (formerly known as TRKD API)integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
+The [Refinitiv Knowledge Direct (RKD) API](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) (formerly known as TRKD API) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
 
 RKD offers a wide range of Refinitiv' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
@@ -24,14 +24,13 @@ This project contains the following example scripts for each RKD services
 	- *notebook/trkd_timeseries_interday.ipynb*: A Jupyter Notebook RKD Time-Series Interday service example
 	- *notebook/trkd_timeseries_intraday.ipynb*: A Jupyter Notebook RKD Time-Series Intraday service example
 - requestments.txt: A requirement file contains a list of required libraries for HTTP JSON and WebSocket connections. 
-- docs\TRKD_REST_with_Python.docx: A document that describes the trkd_authen.py and trkd_quote.py applications
 
 All source code and scripts are provided under the Apache 2.0 license. They are provided AS IS with no warranty or guarantee of fit for purpose. See the project's LICENSE.md for details. 
 
 ## Prerequisite
 The following softwares are required to use this script
 - RKD API credentials. Please reach out to your Refinitiv sales associate to acquire RKD access credentials.
-- Python 3 
+- [Python 3](https://www.python.org/).
 - The [requests](http://docs.python-requests.org/en/master/) library
 - The [websocket-client](https://pypi.org/project/websocket-client/) library (*version 0.49 or greater*, for trkd_wsstreaming.py application only)
 - The [python-dateutil](https://pypi.org/project/python-dateutil/) library (for trkd_wsstreaming.py application only)
