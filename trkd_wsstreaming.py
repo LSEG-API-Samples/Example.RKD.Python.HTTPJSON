@@ -41,6 +41,7 @@ expiration = None
 logged_in = False
 
 ric_name = 'EUR='
+rics_list = ['EUR=','THB=']
 
 expire_time = 0
 time_to_relogin = 15 * 60 # 15 Minutes to Seconds
@@ -75,7 +76,7 @@ def CreateAuthorization(username, password, appid):
     ##create authentication request URL, message and header
     authenMsg = {'CreateServiceToken_Request_1': { 'ApplicationID':appid, 'Username':username,'Password':password }}
     headers = {'content-type': 'application/json;charset=utf-8'}
-    print('############### Sending Authentication request message to TRKD ###############')
+    print('############### Sending Authentication request message to RKD ###############')
     authenResult = doSendRequest(trkd_authen_address, authenMsg, headers)
     if authenResult and authenResult.status_code == 200:
         print('Authentication success')
@@ -113,15 +114,16 @@ def process_message(message_json):
         print("SENT:")
         print(json.dumps(pong_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-# Process incoming Login Refresh message from RKD Elektron WebSocket Server
+# Process incoming Login Refresh message from RKD Real-Time WebSocket Server
 def process_login_response(message_json):
     """ Send item request """
     global logged_in
 
     logged_in = True
-    send_market_price_request(ric_name)
+    send_market_price_request(ric_name) # send a single item request message
+    #send_market_price_batch_request(rics_list) # send a batch items request message
 
-# Send JSON OMM Market Price Request message to RKD Elektron WebSocket Server
+# Send JSON OMM Market Price Request message to RKD Real-Time WebSocket Server
 def send_market_price_request(ric_name):
     """ Create and send simple Market Price request """
     mp_req_json = {
@@ -134,7 +136,20 @@ def send_market_price_request(ric_name):
     print("SENT:")
     print(json.dumps(mp_req_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-# Send JSON OMM Login Request message to RKD Elektron WebSocket Server to initiate the OMM connection
+# Send JSON OMM Market Price Batch Request message to RKD Real-Time WebSocket Server
+def send_market_price_batch_request(rics_list):
+    """ Create and send simple Market Price request """
+    mp_req_json = {
+        'ID': 2,
+        'Key': {
+            'Name': rics_list,
+        },
+    }
+    web_socket_app.send(json.dumps(mp_req_json))
+    print("SENT:")
+    print(json.dumps(mp_req_json, sort_keys=True, indent=2, separators=(',', ':')))
+
+# Send JSON OMM Login Request message to RKD Real-Time WebSocket Server to initiate the OMM connection
 def send_login_request(is_refresh_token=False):
     """ Generate a login request from command line data (or defaults) and send """
     login_json = {
@@ -164,7 +179,7 @@ def send_login_request(is_refresh_token=False):
     print("SENT:")
     print(json.dumps(login_json, sort_keys=True, indent=2, separators=(',', ':')))
 
-# Receive every messages from RKD Elektron WebSocket Server
+# Receive every messages from RKD Real-Time WebSocket Server
 def on_message(_, message):
     """ Called when message received, parse message into JSON for processing """
     print("RECEIVED: ")

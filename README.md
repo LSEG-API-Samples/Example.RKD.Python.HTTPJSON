@@ -1,6 +1,12 @@
 # RKD HTTP JSON with Python Example
-## Overview
-The [Refinitiv Knowledge Direct (RKD) API](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) (formerly known as TRKD API) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
+- version: 1.5.5
+- Last update: May 2021
+- Environment: Windows, Linux
+- Compiler: Python
+- Prerequisite: [Demo prerequisite](#prerequisite)
+
+## <a id="overview"></a>Overview
+The [Refinitiv Knowledge Direct (RKD) API](https://developers.refinitiv.com/en/api-catalog/refinitiv-knowledge-direct/refinitiv-knowledge-direct-api-rkd-api) (formerly known as TRKD API) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
 
 RKD offers a wide range of Refinitiv' information and services delivered in a request-response scenario via web services using today's industry standard protocols (SOAP/XML and REST/JSON). Connectivity can be via HTTP and HTTPS, over the Internet or Delivery Direct. All data are snapshot (non-streaming) data.
 
@@ -8,7 +14,7 @@ This is an example project that shows how to implement RKD HTTP JSON client and 
 
 *Note:* The Jupyter Notebook example does not contain all the same RKD services service as console examples yet. [TBD]
 
-## Application Files
+## <a id="project_files"></a>Application Files
 This project contains the following example scripts for each RKD services
 - trkd_authen.py: An example application that shows how to authenticate with RKD service
 - trkd_quote.py: An example application that shows how to subscribe (all fields and specific fields) the Quote data from RKD service
@@ -27,7 +33,7 @@ This project contains the following example scripts for each RKD services
 
 All source code and scripts are provided under the Apache 2.0 license. They are provided AS IS with no warranty or guarantee of fit for purpose. See the project's LICENSE.md for details. 
 
-## Prerequisite
+## <a id="prerequisite"></a>Prerequisite
 The following softwares are required to use this script
 - RKD API credentials. Please reach out to your Refinitiv sales associate to acquire RKD access credentials.
 - [Python 3](https://www.python.org/).
@@ -41,13 +47,13 @@ All scripts support Python 3 only and not compatible with Python 2.
 *Note:* 
 - You can install Jupyter Notebook on your local machine and then test the example on the machine. The alternate choice is a free Jupyter Notebook on cloud environment such as [Azure Notebook](https://notebooks.azure.com/) provided by Microsoft. You can find more details from [this tutorial](https://docs.microsoft.com/en-us/azure/notebooks/tutorial-create-run-jupyter-notebook). If you are not familiar with Jupyter Notebook, the following [tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) created by DataCamp may help.
 
-## How to run the script
+## <a id="run_console"></a>How to run the script
 Run the script via the command line (or shell)
 ```
 $>python <application>.py
 ```
 
-## Optional - How to install libraries for console examples
+## <a id="library_install"></a>Optional - How to install libraries for console examples
 The best way is via the pip package management tool
 1. export <Python_folder>\Scripts to your OS PATH environment
 2. call pip command to install requests
@@ -62,30 +68,30 @@ The best way is via the pip package management tool
 
 *Note*: If you aim to use only RKD HTTP JSON services, you can just install requests library via a ```pip install requests``` command.
 
-## Optional - How to install libraries for notebook examples
+## <a id="run_notebook"></a>Optional - How to install libraries for notebook examples
 Please follow the [classic Jupyter Notebook installation guide](https://jupyter.org/install) page.
 
-## RDP and ERT in Cloud
+## <a id="rdp"></a>RDP and Refinitiv Real-Time - Optimized
 
-You may consider the strategic [Refinitiv Data Platform (RDP)](https://developers.refinitiv.com/refinitiv-data-platform) web base APIs platform. RDP APIs give you seamless and holistic access to all of Refinitiv content such as Historical Pricing, Environmental Social and Governance (ESG), News, Research, etc and commingled with your own content, enriching, integrating and distributing the data through a single interface, delivered wherever you need it.  The RDP APIs delivery mechanisms are following:
+You may consider the strategic [Refinitiv Data Platform (RDP)](https://developers.refinitiv.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) web base APIs platform. RDP APIs give you seamless and holistic access to all of Refinitiv content such as Historical Pricing, Environmental Social and Governance (ESG), News, Research, etc and commingled with your own content, enriching, integrating and distributing the data through a single interface, delivered wherever you need it.  The RDP APIs delivery mechanisms are following:
 * Request - Response: RESTful web service (HTTP GET, POST, PUT or DELETE) 
 * Alert: delivery is a mechanism to receive asynchronous updates (alerts) to a subscription. 
 * Bulks:  deliver substantial payloads, like the end of day pricing data for the whole venue. 
 * Streaming: deliver real-time delivery of messages.
 
-Please see [RDP API Overview page](https://developers.refinitiv.com/refinitiv-data-platform/refinitiv-data-platform-apis) for more detail.
+Please see [RDP APIs Overview page](https://developers.refinitiv.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) for more detail.
 
-As part of RDP, [Elektron Real Time in Cloud (ERT in Cloud)](https://developers.thomsonreuters.com/elektron/websocket-api/quick-start?content=45253&type=quick_start) gives you access to best in class Real Time market data delivered in the cloud.  ERT in Cloud is a new delivery mechanism for RDP, using the AWS (Amazon Web Services) cloud. Once a connection to RDP is established using ERT in Cloud, data can be retrieved using [Elektron WebSocket API](https://developers.thomsonreuters.com/websocket-api) (the same as RKD Streaming Service).
+As part of RDP, [Refinitiv Real-Time - Optimized (RRTO)](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/refinitiv-websocket-api/tutorials#connect-to-refinitiv-real-time-optimized) gives you access to best in class Real Time market data delivered in the cloud.  RRTO is a new delivery mechanism for RDP, using the AWS (Amazon Web Services) cloud. Once a connection to RDP is established using RRTO, data can be retrieved using [WebSocket API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/refinitiv-websocket-api) (the same as RKD Streaming Service).
 
-Key benefit of the strategic RDP and ERT in Cloud platform are the Cloud Delivery. The Platform is based on [Amazon AWS](https://aws.amazon.com/), the world class leading Cloud Provider for developers. The RDP and ERT in Cloud support output for multiple cloud vendors such as AWS, Azure, GCS, etc. for cloud-native or on-premise integration. The ERT in Cloud servers are hosted in multiple location world-wide which lets the application choose the closest server based on their region for full potential. 
+Key benefit of the strategic RDP and RRTO platform are the Cloud Delivery. The Platform is based on [Amazon AWS](https://aws.amazon.com/), the world class leading Cloud Provider for developers. The RDP and RRTO support output for multiple cloud vendors such as AWS, Azure, GCS, etc. for cloud-native or on-premise integration. The RRTO servers are hosted in multiple location world-wide which lets the application choose the closest server based on their region for full potential. 
 
-## References
+## <a id="references"></a>References
 For further details, please check out the following resources:
-* [Refinitiv Knowledge Direct API page](https://developers.refinitiv.com/thomson-reuters-knowledge-direct-trkd) on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
-* [Refinitiv Knowledge Direct API Catalog](https://www.trkd.thomsonreuters.com/SupportSite/RequestBuilder/requestbuilder.aspx) web site.
-* [Elektron WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
-* [Refinitiv Data Platform (RDP) APIs page](https://developers.refinitiv.com/refinitiv-data-platform).
-* [Refinitiv Data Platform (RDP) APIs Gateway page](https://api.refinitiv.com).
+* [Refinitiv Knowledge Direct API page](https://developers.refinitiv.com/en/api-catalog/refinitiv-knowledge-direct/refinitiv-knowledge-direct-api-rkd-api) on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
+* [Refinitiv Knowledge Direct API Catalog](https://support-portal.rkd.refinitiv.com/SupportSite/TestApi/Catalog) web site.
+* [WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
+* [Refinitiv Data Platform (RDP) APIs page](https://developers.refinitiv.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis).
+* [Refinitiv Data Platform (RDP) APIs Gateway page](https://apidocs.refinitiv.com/Apps/ApiDocs).
 
 ## Release Note
 - Version 1: 6 Sep 2016
@@ -134,7 +140,10 @@ For further details, please check out the following resources:
 - version 1.5.2: October 2019
 	- Update TRKD Interday and Intraday services operations.
 - version 1.5.3: May 2020
-	- Update RDP and ERT in Cloud information.
+	- Update RDP and Refinitiv Real-Time - Optimized information.
 - version 1.5.4: June 2020
 	- Update API name and information.
 	- Fix all typo errors
+- version 1.5.5: May 2021
+	- Re-branding Product names and URLs.
+	- add trkd_wsstreaming.py Batch support.
