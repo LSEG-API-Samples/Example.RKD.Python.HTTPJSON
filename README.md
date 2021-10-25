@@ -1,6 +1,6 @@
 # RKD HTTP JSON with Python Example
 - version: 1.5.5
-- Last update: May 2021
+- Last update: Oct 2021
 - Environment: Windows, Linux
 - Compiler: Python
 - Prerequisite: [Demo prerequisite](#prerequisite)
@@ -81,15 +81,15 @@ You may consider the strategic [Refinitiv Data Platform (RDP)](https://developer
 
 Please see [RDP APIs Overview page](https://developers.refinitiv.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis) for more detail.
 
-As part of RDP, [Refinitiv Real-Time - Optimized (RRTO)](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/refinitiv-websocket-api/tutorials#connect-to-refinitiv-real-time-optimized) gives you access to best in class Real Time market data delivered in the cloud.  RRTO is a new delivery mechanism for RDP, using the AWS (Amazon Web Services) cloud. Once a connection to RDP is established using RRTO, data can be retrieved using [WebSocket API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/refinitiv-websocket-api) (the same as RKD Streaming Service).
+As part of RDP, [Refinitiv Real-Time - Optimized (RTO)](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/refinitiv-websocket-api/tutorials#connect-to-refinitiv-real-time-optimized) gives you access to best in class Real Time market data delivered in the cloud.  RTO is a new delivery mechanism for RDP, using the AWS (Amazon Web Services) cloud. Once a connection to RDP is established using RTO, data can be retrieved using [WebSocket API](https://developers.refinitiv.com/en/api-catalog/refinitiv-real-time-opnsrc/refinitiv-websocket-api) (the same as RKD Streaming Service).
 
-Key benefit of the strategic RDP and RRTO platform are the Cloud Delivery. The Platform is based on [Amazon AWS](https://aws.amazon.com/), the world class leading Cloud Provider for developers. The RDP and RRTO support output for multiple cloud vendors such as AWS, Azure, GCS, etc. for cloud-native or on-premise integration. The RRTO servers are hosted in multiple location world-wide which lets the application choose the closest server based on their region for full potential. 
+Key benefit of the strategic RDP and RTO platform are the Cloud Delivery. The Platform is based on [Amazon AWS](https://aws.amazon.com/), the world class leading Cloud Provider for developers. The RDP and RTO support output for multiple cloud vendors such as AWS, Azure, GCS, etc. for cloud-native or on-premise integration. The RTO servers are hosted in multiple location world-wide which lets the application choose the closest server based on their region for full potential. 
 
 ## <a id="references"></a>References
 For further details, please check out the following resources:
-* [Refinitiv Knowledge Direct API page](https://developers.refinitiv.com/en/api-catalog/refinitiv-knowledge-direct/refinitiv-knowledge-direct-api-rkd-api) on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
-* [Refinitiv Knowledge Direct API Catalog](https://support-portal.rkd.refinitiv.com/SupportSite/TestApi/Catalog) web site.
-* [WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Refinitiv Developers Community](https://developers.refinitiv.com/) web site.
+* [Refinitiv Knowledge Direct API page](https://developers.refinitiv.com/en/api-catalog/refinitiv-knowledge-direct/refinitiv-knowledge-direct-api-rkd-api) on the [Refinitiv Developers Community](https://developers.refinitiv.com/) website.
+* [Refinitiv Knowledge Direct API Catalog](https://support-portal.rkd.refinitiv.com/SupportSite/TestApi/Catalog) website.
+* [WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Refinitiv Developers Community](https://developers.refinitiv.com/) website.
 * [Refinitiv Data Platform (RDP) APIs page](https://developers.refinitiv.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-platform-apis).
 * [Refinitiv Data Platform (RDP) APIs Gateway page](https://apidocs.refinitiv.com/Apps/ApiDocs).
 
