@@ -14,6 +14,7 @@ import requests
 import json
 import getpass
 import urllib
+from dotenv import load_dotenv
 
 # Send HTTP request for all services
 def doSendRequest(url, requestMsg, headers):
@@ -23,7 +24,7 @@ def doSendRequest(url, requestMsg, headers):
         result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
         # print('outgoing message is %s'%(json.dumps(requestMsg)))
         ## handle error
-        if result.status_code is not 200:
+        if result.status_code != 200:
             print('Request fail')
             print('response status %s'%(result.status_code))
             if result.status_code == 500: ## if username or password or appid is wrong
@@ -312,11 +313,21 @@ def downloadChartImage(chartURL):
 ## ------------------------------------------ Main App ------------------------------------------ ##
 
 if __name__ == '__main__':
-    ## Get username, password and applicationid
-    username = input('Please input username: ')
-    ## Use getpass.getpass to hide user inputted password
-    password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')    
+    # Load Environment Variables
+    load_dotenv()
+    # Get username, password and application_id from Environment Variables or .env
+    username = os.getenv('RKD_USERNAME')
+    # use getpass.getpass to hide user inputted password
+    password = os.getenv('RKD_PASSWORD')
+    appid = os.getenv('RKD_APP_ID')
+
+    #If not Environment Variables or .env
+    if not (username and password and appid):
+        ## Get username, password and applicationid
+        username = input('Please input username: ')
+        ## Use getpass.getpass to hide user inputted password
+        password = getpass.getpass(prompt='Please input password: ')
+        appid = input('Please input appid: ')    
 
     token = CreateAuthorization(username,password,appid)
     print('Token = %s'%(token))

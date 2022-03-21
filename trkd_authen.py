@@ -11,14 +11,27 @@ import sys
 import json
 import getpass
 import requests
+import os
+from dotenv import load_dotenv
 
 
 if __name__ == '__main__':
-    # Get username, password and applicationid
-    username = input('Please input username: ')
+
+    # Load Environment Variables
+    load_dotenv()
+    # Get username, password and application_id from Environment Variables or .env
+    username = os.getenv('RKD_USERNAME')
     # use getpass.getpass to hide user inputted password
-    password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')
+    password = os.getenv('RKD_PASSWORD')
+    appid = os.getenv('RKD_APP_ID')
+
+    #If not Environment Variables or .env
+    if not (username and password and appid):
+        # Get username, password and application_id
+        username = input('Please input username: ')
+        # use getpass.getpass to hide user inputted password
+        password = getpass.getpass(prompt='Please input password: ')
+        appid = input('Please input appid: ')
     print('############### Sending Authentication request message to RKD ###############')
 
     # create authentication request URL, message and header

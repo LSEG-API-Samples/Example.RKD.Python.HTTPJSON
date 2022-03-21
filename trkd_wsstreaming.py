@@ -23,6 +23,8 @@ from threading import Thread, Event
 from datetime import datetime, timezone, timedelta
 import dateutil.parser
 
+from dotenv import load_dotenv
+
 
 # Global Default Variables
 ws_address = 'wss://streaming.rkd.refinitiv.com/WebSocket/'
@@ -56,7 +58,7 @@ def doSendRequest(url, requestMsg, headers):
         result = requests.post(url, data=json.dumps(requestMsg), headers=headers)
         # print('outgoing message is %s'%(json.dumps(requestMsg)))
         ## handle error
-        if result.status_code is not 200:
+        if result.status_code != 200:
             print('Request fail')
             print('response status %s'%(result.status_code))
             if result.status_code == 500: ## if username or password or appid is wrong
@@ -195,7 +197,7 @@ def on_error(__file__, error):
     print(error)
 
 
-def on_close(_):
+def on_close(_,close_status_code, close_msg):
     """ Called when websocket is closed """
     global web_socket_open
     print("WebSocket Closed")
@@ -213,11 +215,21 @@ def on_open(_):
 ## ------------------------------------------ Main App ------------------------------------------ ##
 
 if __name__ == '__main__':
-    ## Get username, password and applicationid
-    username = input('Please input username: ')
-    ## Use getpass.getpass to hide user inputted password
-    password = getpass.getpass(prompt='Please input password: ')
-    appid = input('Please input appid: ')   
+    # Load Environment Variables
+    load_dotenv()
+    # Get username, password and application_id from Environment Variables or .env
+    username = os.getenv('RKD_USERNAME')
+    # use getpass.getpass to hide user inputted password
+    password = os.getenv('RKD_PASSWORD')
+    appid = os.getenv('RKD_APP_ID')
+
+    #If not Environment Variables or .env
+    if not (username and password and appid):
+        ## Get username, password and applicationid
+        username = input('Please input username: ')
+        ## Use getpass.getpass to hide user inputted password
+        password = getpass.getpass(prompt='Please input password: ')
+        appid = input('Please input appid: ')   
 
 
     token, expiration, expire_time = CreateAuthorization(username,password,appid)

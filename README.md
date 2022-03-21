@@ -1,9 +1,12 @@
-# RKD HTTP JSON with Python Example
-- version: 1.5.5
-- Last update: Oct 2021
+# RKD HTTP JSON with Python Examples
+- version: 1.6.0
+- Last update: Mar 2022
 - Environment: Windows, Linux
 - Compiler: Python
 - Prerequisite: [Demo prerequisite](#prerequisite)
+
+Example Code Disclaimer:
+ALL EXAMPLE CODE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS FOR ILLUSTRATIVE PURPOSES ONLY. REFINITIV MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE EXAMPLE CODE, OR THE INFORMATION, CONTENT, OR MATERIALS USED IN CONNECTION WITH THE EXAMPLE CODE. YOU EXPRESSLY AGREE THAT YOUR USE OF THE EXAMPLE CODE IS AT YOUR SOLE RISK.
 
 ## <a id="overview"></a>Overview
 The [Refinitiv Knowledge Direct (RKD) API](https://developers.refinitiv.com/en/api-catalog/refinitiv-knowledge-direct/refinitiv-knowledge-direct-api-rkd-api) (formerly known as TRKD API) integrates into your website, trading platform, company intranet/extranet, advisory portal and mobile applications to provide up-to-date financial market data, news and analytics and powerful investment tools.
@@ -35,41 +38,71 @@ All source code and scripts are provided under the Apache 2.0 license. They are 
 
 ## <a id="prerequisite"></a>Prerequisite
 The following softwares are required to use this script
-- RKD API credentials. Please reach out to your Refinitiv sales associate to acquire RKD access credentials.
-- [Python 3](https://www.python.org/).
-- The [requests](http://docs.python-requests.org/en/master/) library
-- The [websocket-client](https://pypi.org/project/websocket-client/) library (*version 0.49 or greater*, for trkd_wsstreaming.py application only)
-- The [python-dateutil](https://pypi.org/project/python-dateutil/) library (for trkd_wsstreaming.py application only)
-- The [classic Jupyter Notebook](https://jupyter.org/) runtime (for the Notebook example application)
+- RKD API credentials. Please reach out to your Refinitiv representative to acquire RKD access credentials.
+- Python [Anaconda](https://www.anaconda.com/distribution/) or [MiniConda](https://docs.conda.io/en/latest/miniconda.html) distribution/package manager.
+- The [JupyterLab](https://jupyter.org/) runtime (for the Notebook example application)
 
 All scripts support Python 3 only and not compatible with Python 2.
 
 *Note:* 
 - You can install Jupyter Notebook on your local machine and then test the example on the machine. The alternate choice is a free Jupyter Notebook on cloud environment such as [Azure Notebook](https://notebooks.azure.com/) provided by Microsoft. You can find more details from [this tutorial](https://docs.microsoft.com/en-us/azure/notebooks/tutorial-create-run-jupyter-notebook). If you are not familiar with Jupyter Notebook, the following [tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) created by DataCamp may help.
 
-## <a id="run_console"></a>How to run the script
-Run the script via the command line (or shell)
-```
-$>python <application>.py
-```
 
-## <a id="library_install"></a>Optional - How to install libraries for console examples
-The best way is via the pip package management tool
-1. export <Python_folder>\Scripts to your OS PATH environment
-2. call pip command to install requests
-	```
-	$>pip install -r requirements.txt
-	```
-3. If you are behind proxy, set the proxy first
-	```
-	export https_proxy="http://<proxy.server>:<port>"
-	$>pip install -r requirements.txt
-	```
+### <a id="python_example_run"></a>How to run the Python Console examples
 
-*Note*: If you aim to use only RKD HTTP JSON services, you can just install requests library via a ```pip install requests``` command.
+1. Open Anaconda Prompt and go to the project's Python folder
+2. Run the following command in the Anaconda Prompt application to create a Conda environment named *RKD_Python* for the project.
+    ```
+    (base) $>conda create --name RKD_Python python=3.9
+    ```
+3. Once the environment is created, activate a Conda environment named ```RKD_Python``` with this command in Anaconda Prompt.
+    ```
+    (base) $>conda activate RKD_Python
+    ```
+4. Run the following command to the dependencies in the *RKD_Python* environment with a **requirements.txt** file.
+    ```
+    (RKD_Python) $>pip install -r requirements.txt
+    ```
+5. Once the dependencies installation process success, Go to the project's Python folder. and create a file name ```.env``` with the following content.
+    ```
+	#RKD Access Credentials
+    RKD_USERNAME=<RKD Username>
+	RKD_PASSWORD=<RKD Password>
+	RKD_APP_ID=<RKD App ID>
+    ```
+6. Run the script via the command line (or shell)
+    ```
+    (RKD_Python) $>python <application>.py
+    ```
 
-## <a id="run_notebook"></a>Optional - How to install libraries for notebook examples
-Please follow the [classic Jupyter Notebook installation guide](https://jupyter.org/install) page.
+### <a id="python_example_run"></a>How to run the Python Notebook examples
+
+1. Open Anaconda Prompt and go to the project's Python folder
+2. Run the following command in the Anaconda Prompt application to create a Conda environment named *RKD_Python_Notebook* for the project.
+    ```
+    (base) $>conda create --name RKD_Python_Notebook python=3.9
+    ```
+3. Once the environment is created, activate a Conda environment named ```RKD_Python_Notebook``` with this command in Anaconda Prompt.
+    ```
+    (base) $>conda activate RKD_Python_Notebook
+    ```
+4. Run the following command to the dependencies in the *RKD_Python_Notebook* environment with a **requirements-notebook.txt** file.
+    ```
+    (RKD_Python_Notebook) $>pip install -r requirements-notebook.txt
+    ```
+5. Once the dependencies installation process success, Go to the project's notebook folder. and create a file name ```.env``` with the following content.
+    ```
+	#RKD Access Credentials
+    RKD_USERNAME=<RKD Username>
+	RKD_PASSWORD=<RKD Password>
+	RKD_APP_ID=<RKD App ID>
+    ```
+6. Run the following command to start the Jupyter Lab application
+    ```
+    (RKD_Python_Notebook) $>notebook>jupyter lab
+    ```
+
+Please follow the [JupyterLab installation guide](https://jupyter.org/install) page.
 
 ## <a id="rdp"></a>RDP and Refinitiv Real-Time - Optimized
 
@@ -129,16 +162,16 @@ For further details, please check out the following resources:
 - version 1.0.10: 9 Aug 2018
 	- remove all ```is not None``` statements and make them a bit more **Pythonic**.
 - version 1.0.11: January 2019
-	- Add trkd_wsstreaming.py application for TRKD Streaming service.
+	- Add trkd_wsstreaming.py application for RKD Streaming service.
 	- Add License.md file
 - version 1.0.12: March 2019
 	- Change all scripts to print JSON message in beauty format.
 - version 1.5: July 2019
-	- Add TRKD Authentication Jupyter Notebook.
+	- Add RKD Authentication Jupyter Notebook.
 - version 1.5.1: July 2019
-	- Add TRKD Interday and Intraday Jupyter Notebooks.
+	- Add RKD Interday and Intraday Jupyter Notebooks.
 - version 1.5.2: October 2019
-	- Update TRKD Interday and Intraday services operations.
+	- Update RKD Interday and Intraday services operations.
 - version 1.5.3: May 2020
 	- Update RDP and Refinitiv Real-Time - Optimized information.
 - version 1.5.4: June 2020
@@ -147,3 +180,7 @@ For further details, please check out the following resources:
 - version 1.5.5: May 2021
 	- Re-branding Product names and URLs.
 	- add trkd_wsstreaming.py Batch support.
+- version 1.6.0: Mar 2022
+	- Add ```dotenv``` and Environment Variable for credentials
+	- Update requirements.txt and requirements-notebook.txt files
+	- Update libraries versions

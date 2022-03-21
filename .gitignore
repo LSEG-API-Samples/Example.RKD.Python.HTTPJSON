@@ -8,3 +8,6 @@ notebook/.ipynb_checkpoints
 trkd_websocketexample.py
 ERT_in_Cloud/
 internal_dev/
+requirements.txt_old
+.env
+notebook/.env
