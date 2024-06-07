@@ -77,7 +77,7 @@ soupsieve==2.3.1
 stack-data==0.2.0
 terminado==0.13.3
 testpath==0.6.0
-tornado==6.3.3
+tornado==6.4.1
 traitlets==5.1.1
 urllib3==1.26.18
 wcwidth==0.2.5
