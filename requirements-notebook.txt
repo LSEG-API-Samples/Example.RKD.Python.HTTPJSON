@@ -29,7 +29,7 @@ jsonschema==4.4.0
 jupyter-client==7.1.2
 jupyter-core==4.11.2
 jupyter-server==2.11.2
-jupyterlab==3.6.8
+jupyterlab==4.4.8
 jupyterlab-pygments==0.1.2
 jupyterlab-server==2.11.2
 kiwisolver==1.4.0
