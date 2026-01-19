@@ -127,7 +127,7 @@ For further details, please check out the following resources:
 - [LSEG Knowledge Direct API Official website](https://support-portal.rkd.refinitiv.com/SupportSite/Home/UserHome).
 - [Knowledge Direct API page](https://developers.lseg.com/en/api-catalog/refinitiv-knowledge-direct/refinitiv-knowledge-direct-api-rkd-api) on the [LSEG Developers Portal](https://developers.LSEG.com/) website.
 - [Knowledge Direct API Catalog](https://support-portal.rkd.refinitiv.com/SupportSite/TestApi/Catalog) website.
-- [WebSocket API](https://developers.refinitiv.com/websocket-api) page on the [Refinitiv Developers Community](https://developers.refinitiv.com/) website.
+- [LSEG Real-Time WebSocket API](https://developers.lseg.com/en/api-catalog/real-time-opnsrc/websocket-api) website.
 
 For any questions related to this tutorial or RKD API, please use the Developer Community [Q&A Forum](https://community.developers.refinitiv.com).
 
