@@ -43,25 +43,30 @@ All source code and scripts are provided under the Apache 2.0 license. They are 
 The following softwares are required to use this script
 
 - RKD API credentials. Please reach out to your LSEG representative to acquire RKD access credentials.
-- Python [Anaconda](https://www.anaconda.com/distribution/) or [MiniConda](https://docs.conda.io/en/latest/miniconda.html) distribution/package manager.
+- [Python](https://www.python.org/).
 - The [JupyterLab](https://jupyter.org/) runtime (for the Notebook example application)
 
 All scripts support Python 3 only and not compatible with Python 2.
 
+
 *Note:* 
 - You can install Jupyter Notebook on your local machine and then test the example on the machine. The alternate choice is a free Jupyter Notebook on cloud environment such as [Azure Notebook](https://notebooks.azure.com/) provided by Microsoft. You can find more details from [this tutorial](https://docs.microsoft.com/en-us/azure/notebooks/tutorial-create-run-jupyter-notebook). If you are not familiar with Jupyter Notebook, the following [tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook) created by DataCamp may help.
-
+- The Python [Anaconda](https://www.anaconda.com/distribution/) or [MiniConda](https://docs.conda.io/en/latest/miniconda.html) distribution/package manager are also supported.
 
 ### <a id="python_example_run"></a>How to run the Python Console examples
 
-1. Open Anaconda Prompt and go to the project's Python folder
-2. Run the following command in the Anaconda Prompt application to create a Conda environment named *RKD_Python* for the project.
+1. Open Command Prompt and go to the project's Python folder
+2. Run the following command in the Command Prompt application to create a Python virtual environment named *RKD_Python* for the project.
     ```bash
-    (base) $>conda create --name RKD_Python python=3.9
+    $>python -m venv RKD_Python
     ```
-3. Once the environment is created, activate a Conda environment named ```RKD_Python``` with this command in Anaconda Prompt.
+3. Once the environment is created, activate an environment named ```RKD_Python``` with this command in Command Prompt.
     ```bash
-    (base) $>conda activate RKD_Python
+	#Windows
+    $>RKD_Python\Scripts\activate
+
+	#Linux
+	$>source RKD_Python/bin/activate
     ```
 4. Run the following command to the dependencies in the *RKD_Python* environment with a **requirements.txt** file.
     ```bash
@@ -79,18 +84,22 @@ All scripts support Python 3 only and not compatible with Python 2.
     (RKD_Python) $>python <application>.py
     ```
 
-**Note**: The Python examples also compatible with the Python [venv](https://docs.python.org/3/library/venv.html).
+**Note**: The Python examples also compatible with the Python [Conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
 ### <a id="python_example_run"></a>How to run the Python Notebook examples
 
-1. Open Anaconda Prompt and go to the project's Python folder
-2. Run the following command in the Anaconda Prompt application to create a Conda environment named *RKD_Python_Notebook* for the project.
+1. Open Command Prompt and go to the project's Python folder
+2. Run the following command in the Command Prompt application to create a Python virtual environment named *RKD_Python_Notebook* for the project.
     ```bash
-    (base) $>conda create --name RKD_Python_Notebook python=3.9
+    $>python -m venv RKD_Python_Notebook
     ```
-3. Once the environment is created, activate a Conda environment named ```RKD_Python_Notebook``` with this command in Anaconda Prompt.
+3. Once the environment is created, activate an environment named ```RKD_Python_Notebook``` with this command in Command Prompt.
     ```bash
-    (base) $>conda activate RKD_Python_Notebook
+	#Windows
+    $>RKD_Python_Notebook\Scripts\activate
+
+	#Linux
+	$>source RKD_Python_Notebook/bin/activate
     ```
 4. Run the following command to the dependencies in the *RKD_Python_Notebook* environment with a **requirements-notebook.txt** file.
     ```bash
@@ -108,7 +117,7 @@ All scripts support Python 3 only and not compatible with Python 2.
     (RKD_Python_Notebook) $>notebook>jupyter lab
     ```
 
-**Note**: The Python Jupyter examples also compatible with the Python [venv](https://docs.python.org/3/library/venv.html).
+**Note**: The Python examples also compatible with the Python [Conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
 Please follow the [JupyterLab installation guide](https://jupyter.org/install) page.
 
@@ -182,3 +191,6 @@ For any questions related to this tutorial or RKD API, please use the Developer 
 	- Update libraries versions
 - version 1.6.5: January 2026
 	- Rebranding LSEG
+	- Updated all links to be up-to-date
+	- Updated libraries
+	- Updated to use Python venv as a suggestion environment instead of Conda.
