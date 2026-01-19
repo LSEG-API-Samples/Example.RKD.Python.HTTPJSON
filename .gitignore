@@ -11,3 +11,5 @@ internal_dev/
 requirements.txt_old
 .env
 notebook/.env
+venv/
+notebook_venv/

@@ -4,7 +4,7 @@ and without knowledge or assumptions of the end users development environment.
 We offer this code to provide developers practical and useful guidance while developing their own code. 
 However, we do not offer support and troubleshooting of issues that are related to the use of this code 
 in a particular environment; it is offered solely as sample code for guidance. 
-Please see the Refinitiv Knowledge Direct (RKD) API (formerly known as TRKD API) product page at https://my.refinitiv.com 
+Please see the Knowledge Direct (RKD) API (formerly known as TRKD API) product page at https://support-portal.rkd.refinitiv.com/SupportSite/Home/UserHome
 for additional information regarding the RKD API.'''
 
 import os
