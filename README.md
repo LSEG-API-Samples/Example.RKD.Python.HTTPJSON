@@ -1,6 +1,6 @@
 # RKD HTTP JSON with Python Examples
-- version: 1.6.5
-- Last update: January 2026
+- version: 1.6.7
+- Last update: May 2026
 - Environment: Windows, Linux
 - Compiler: Python
 - Prerequisite: [Demo prerequisite](#prerequisite)
@@ -194,3 +194,6 @@ For any questions related to this tutorial or RKD API, please use the Developer 
 	- Updated all links to be up-to-date
 	- Updated libraries
 	- Updated to use Python venv as a suggestion environment instead of Conda.
+- version 1.6.7: May 2026
+	- Updated libraries
+	- Updated license
