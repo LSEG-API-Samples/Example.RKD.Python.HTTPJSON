@@ -1,7 +1,7 @@
 # RKD HTTP JSON with Python Examples
-- version: 1.6.7
-- Last update: May 2026
-- Environment: Windows, Linux
+- version: 1.6.8
+- Last update: Aug 2026
+- Environment: Windows
 - Compiler: Python
 - Prerequisite: [Demo prerequisite](#prerequisite)
 
@@ -197,3 +197,5 @@ For any questions related to this tutorial or RKD API, please use the Developer 
 - version 1.6.7: May 2026
 	- Updated libraries
 	- Updated license
+- version 1.6.8: Aug 2026
+	- Updated libraries
