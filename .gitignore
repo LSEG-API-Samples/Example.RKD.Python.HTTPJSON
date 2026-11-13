@@ -13,3 +13,4 @@ requirements.txt_old
 notebook/.env
 venv/
 notebook_venv/
+.venv/
